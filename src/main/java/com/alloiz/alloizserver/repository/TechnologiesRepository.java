@@ -1,4 +1,7 @@
 package com.alloiz.alloizserver.repository;
 
-public interface TechnologiesRepository {
+import com.alloiz.alloizserver.model.Technologies;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TechnologiesRepository extends JpaRepository<Technologies,Long> {
 }
