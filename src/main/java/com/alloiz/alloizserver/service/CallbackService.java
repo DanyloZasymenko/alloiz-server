@@ -6,9 +6,9 @@ import com.alloiz.alloizserver.model.Callback;
 import java.util.List;
 
 public interface CallbackService {
-    Callback findOneAvaliable(Long id);
+    Callback findOneAvailable(Long id);
 
-    List<Callback> findAllAvaliable();
+    List<Callback> findAllAvailable();
 
     Callback findOne(Long id);
 

@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface IncumbencyService {
 
-  Incumbency findOneAvaliable(Long id);
+  Incumbency findOneAvailable(Long id);
 
-  List<Incumbency> findAllAvaliable();
+  List<Incumbency> findAllAvailable();
 
   Incumbency findOne(Long id);
 
