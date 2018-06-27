@@ -1,7 +1,7 @@
 package com.alloiz.alloizserver.dto.utils.builder;
 
 
-import com.alloiz.alloizserver.dto.DtoMapper;
+import com.alloiz.alloizserver.dto.utils.DtoMapper;
 import com.alloiz.alloizserver.dto.utils.impl.DtoMapperImpl;
 
 public class Builder {
