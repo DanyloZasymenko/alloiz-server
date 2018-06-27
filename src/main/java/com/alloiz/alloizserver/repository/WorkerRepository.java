@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface WorkerRepository extends JpaRepository<Worker,Long> {
+
     List<Worker> findAllByAvailable(Boolean available);
 
     Worker findByAvailableAndId(Boolean available, Long id);
