@@ -7,7 +7,6 @@ import javax.persistence.Column;
 public class Portfolio extends General{
 
   private String link;
-
   private List<String> images;
 
   @Column(columnDefinition = "LONGTEXT")
