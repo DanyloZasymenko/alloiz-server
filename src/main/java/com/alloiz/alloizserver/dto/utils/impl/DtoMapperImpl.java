@@ -1,9 +1,9 @@
-package com.alloiz.alloizserver.dto.impl;
+package com.alloiz.alloizserver.dto.utils.impl;
 
 
 import com.alloiz.alloizserver.dto.DtoMapper;
-import com.alloiz.alloizserver.dto.annotations.Dto;
-import com.alloiz.alloizserver.dto.annotations.EnableMapper;
+import com.alloiz.alloizserver.dto.utils.annotations.Dto;
+import com.alloiz.alloizserver.dto.utils.annotations.EnableMapper;
 import org.reflections.Reflections;
 
 import javax.persistence.Entity;

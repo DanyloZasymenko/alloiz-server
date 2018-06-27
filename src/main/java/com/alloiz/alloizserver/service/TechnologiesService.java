@@ -14,7 +14,7 @@ public interface TechnologiesService {
 
     List<Technologies> findAll();
 
-    void save(Technologies technologies);
+    Technologies save(Technologies technologies);
 
     Boolean delete(Long id);
 }

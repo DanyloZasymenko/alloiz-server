@@ -34,8 +34,8 @@ public class PortfolioServiceImpl implements PortfolioService {
   }
 
   @Override
-  public void save(Portfolio portfolio) {
-    portfolioRepository.save(portfolio);
+  public Portfolio save(Portfolio portfolio) {
+    return portfolioRepository.save(portfolio);
   }
 
   @Override

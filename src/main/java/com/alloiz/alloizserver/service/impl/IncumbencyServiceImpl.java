@@ -34,8 +34,8 @@ public class IncumbencyServiceImpl implements IncumbencyService {
   }
 
   @Override
-  public void save(Incumbency incumbency) {
-    incumbencyRepository.save(incumbency);
+  public Incumbency save(Incumbency incumbency) {
+   return incumbencyRepository.save(incumbency);
   }
 
   @Override

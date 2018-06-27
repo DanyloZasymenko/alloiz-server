@@ -1,4 +1,4 @@
-package com.alloiz.alloizserver.dto.annotations;
+package com.alloiz.alloizserver.dto.utils.annotations;
 
 
 import java.lang.annotation.Retention;

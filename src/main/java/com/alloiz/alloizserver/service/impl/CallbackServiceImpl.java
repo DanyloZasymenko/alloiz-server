@@ -35,8 +35,8 @@ public class CallbackServiceImpl implements CallbackService {
     }
 
     @Override
-    public void save(Callback callback) {
-        callbackRepository.save(callback);
+    public Callback save(Callback callback) {
+       return callbackRepository.save(callback);
     }
 
     @Override

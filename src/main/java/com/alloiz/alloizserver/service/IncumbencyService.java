@@ -13,7 +13,7 @@ public interface IncumbencyService {
 
   List<Incumbency> findAll();
 
-  void save(Incumbency incumbency);
+  Incumbency save(Incumbency incumbency);
 
   Boolean deleteById(Long id);
 }

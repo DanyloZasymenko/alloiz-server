@@ -35,8 +35,8 @@ public class TechnologiesServiceImpl implements TechnologiesService {
     }
 
     @Override
-    public void save(Technologies technologies) {
-        technologiesRepository.save(technologies);
+    public Technologies save(Technologies technologies) {
+        return technologiesRepository.save(technologies);
     }
 
     @Override

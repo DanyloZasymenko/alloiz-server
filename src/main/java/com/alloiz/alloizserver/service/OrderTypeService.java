@@ -13,7 +13,7 @@ public interface OrderTypeService {
 
   List<OrderType> findAll();
 
-  void save(OrderType orderType);
+  OrderType save(OrderType orderType);
 
   Boolean deleteById(Long id);
 }

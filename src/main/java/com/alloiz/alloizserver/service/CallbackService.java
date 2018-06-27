@@ -14,7 +14,7 @@ public interface CallbackService {
 
     List<Callback> findAll();
 
-    void save(Callback callback);
+    Callback save(Callback callback);
 
     Boolean delete(Long id);
 }
