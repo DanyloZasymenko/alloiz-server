@@ -13,7 +13,7 @@ public interface CallbackTopicService {
 
   List<CallbackTopic> findAll();
 
-  void save(CallbackTopic portfolio);
+  void save(CallbackTopic callbackTopic);
 
   Boolean deleteById(Long id);
 }

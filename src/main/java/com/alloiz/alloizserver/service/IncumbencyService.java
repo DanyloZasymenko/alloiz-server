@@ -13,7 +13,7 @@ public interface IncumbencyService {
 
   List<Incumbency> findAll();
 
-  void save(Incumbency portfolio);
+  void save(Incumbency incumbency);
 
   Boolean deleteById(Long id);
 }
