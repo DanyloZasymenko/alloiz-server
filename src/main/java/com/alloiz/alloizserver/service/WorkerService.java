@@ -5,9 +5,9 @@ import com.alloiz.alloizserver.model.Worker;
 import java.util.List;
 
 public interface WorkerService {
-    Worker findOneAvaliable(Long id);
+    Worker findOneAvailable(Long id);
 
-    List<Worker> findAllAvaliable();
+    List<Worker> findAllAvailable();
 
     Worker findOne(Long id);
 
