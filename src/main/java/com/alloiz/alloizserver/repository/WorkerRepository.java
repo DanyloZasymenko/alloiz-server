@@ -1,4 +1,7 @@
 package com.alloiz.alloizserver.repository;
 
-public interface WorkerRepository {
+import com.alloiz.alloizserver.model.Worker;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface WorkerRepository extends JpaRepository<Worker,Long> {
 }

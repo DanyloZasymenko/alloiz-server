@@ -1,4 +1,8 @@
 package com.alloiz.alloizserver.repository;
 
-public interface PortfolioRepository {
+import com.alloiz.alloizserver.model.Portfolio;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PortfolioRepository extends JpaRepository <Portfolio,Long> {
+
 }

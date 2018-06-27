@@ -1,4 +1,7 @@
 package com.alloiz.alloizserver.repository;
 
-public interface OrderTypeRepository {
+import com.alloiz.alloizserver.model.OrderType;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrderTypeRepository extends JpaRepository<OrderType, Long> {
 }
