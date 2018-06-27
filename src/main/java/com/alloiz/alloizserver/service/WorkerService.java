@@ -13,7 +13,7 @@ public interface WorkerService {
 
     List<Worker> findAll();
 
-    void save(Worker callback);
+    void save(Worker worker);
 
     Boolean delete(Long id);
 }
