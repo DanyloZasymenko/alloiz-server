@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface CallbackTopicService {
 
-  CallbackTopic findOneAvaliable(Long id);
+  CallbackTopic findOneAvailable(Long id);
 
-  List<CallbackTopic> findAllAvaliable();
+  List<CallbackTopic> findAllAvailable();
 
   CallbackTopic findOne(Long id);
 
