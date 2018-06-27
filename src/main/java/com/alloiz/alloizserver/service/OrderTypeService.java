@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface OrderTypeService {
 
-  OrderType findOneAvaliable(Long id);
+  OrderType findOneAvailable(Long id);
 
-  List<OrderType> findAllAvaliable();
+  List<OrderType> findAllAvailable();
 
   OrderType findOne(Long id);
 

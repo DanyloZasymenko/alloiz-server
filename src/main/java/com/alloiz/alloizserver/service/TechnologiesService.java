@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface TechnologiesService {
 
-    Technologies findOneAvaliable(Long id);
+    Technologies findOneAvailable(Long id);
 
-    List<Technologies> findAllAvaliable();
+    List<Technologies> findAllAvailable();
 
     Technologies findOne(Long id);
 
