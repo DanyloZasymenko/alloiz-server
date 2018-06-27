@@ -1,5 +1,8 @@
 package com.alloiz.alloizserver.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Incumbency extends General{
 
   private Boolean isOpen;

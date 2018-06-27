@@ -15,32 +15,44 @@ public class TechnologiesServiceImpl implements TechnologiesService {
     private TechnologiesRepository technologiesRepository;
 
     @Override
-    public Technologies findOneAvaliable(Long id) {
-        return null;
+    public Technologies findOneAvailable(Long id) {
+        return technologiesRepository.findByAvailableAndId(true, id);
     }
 
     @Override
-    public List<Technologies> findAllAvaliable() {
-        return null;
+    public List<Technologies> findAllAvailable() {
+        return technologiesRepository.findAllByAvailable(true);
     }
 
     @Override
     public Technologies findOne(Long id) {
-        return null;
+        return technologiesRepository.findOne(id);
     }
 
     @Override
     public List<Technologies> findAll() {
-        return null;
+        return technologiesRepository.findAll();
     }
 
     @Override
     public void save(Technologies technologies) {
-
+        technologiesRepository.save(technologies);
     }
 
     @Override
     public Boolean delete(Long id) {
-        return null;
+       if(id != null && id >= 0){
+           Technologies technologies = technologiesRepository.findOne(id);
+           if(technologies != null){
+               technologiesRepository.delete(technologies);
+                return true;
+           }
+           else {
+               return false;
+           }
+       }
+       else{
+            throw new NullPointerException("Id is null or less than zero");
+       }
     }
 }

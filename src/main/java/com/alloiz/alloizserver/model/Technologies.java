@@ -2,7 +2,9 @@ package com.alloiz.alloizserver.model;
 
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 
+@Entity
 public class Technologies extends General{
 
     private String image;

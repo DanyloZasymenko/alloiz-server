@@ -1,5 +1,8 @@
 package com.alloiz.alloizserver.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Worker extends General{
     private String name;
     private String surname;
