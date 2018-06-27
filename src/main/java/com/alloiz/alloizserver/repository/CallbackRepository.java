@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface CallbackRepository extends JpaRepository<Callback, Long> {
+
     List<Callback> findAllByAvailable(Boolean available);
 
     Callback findByAvailableAndId(Boolean available, Long id);
