@@ -3,11 +3,12 @@ package com.alloiz.alloizserver.service;
 import com.alloiz.alloizserver.model.Portfolio;
 import java.util.List;
 
+
 public interface PortfolioService {
 
-  Portfolio findOneAvaliable(Long id);
+  Portfolio findOneAvailable(Long id);
 
-  List<Portfolio> findAllAvaliable();
+  List<Portfolio> findAllAvailable();
 
   Portfolio findOne(Long id);
 
