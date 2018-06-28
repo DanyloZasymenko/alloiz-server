@@ -53,6 +53,11 @@ public class PortfolioController {
         return ResponseEntity.ok(map(portfolioService.update(map(portfolio, Portfolio.class)), PortfolioDto.class));
     }
 
+    @PostMapping("/update-image/{id}")
+    private ResponseEntity<PortfolioDto> updateImage(@RequestParam MultipartFile [] multipartFile, @PathVariable Long id) {
+        return ResponseEntity.ok(map(portfolioService.updateImage(multipartFile, id), PortfolioDto.class));
+    }
+
     @DeleteMapping("/delete/{id}")
     private ResponseEntity delete(@PathVariable Long id) {
         return new ResponseEntity(map(portfolioService.deleteById(id) ? HttpStatus.OK : HttpStatus.CONFLICT));
