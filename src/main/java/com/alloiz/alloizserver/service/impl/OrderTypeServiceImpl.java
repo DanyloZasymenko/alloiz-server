@@ -39,7 +39,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
   }
 
   @Override
-  public Boolean deleteById(Long id) {
+  public Boolean delete(Long id) {
     if(id != null && id >= 0){
       OrderType orderType = orderTypeRepository.findOne(id);
       if(orderType != null){
