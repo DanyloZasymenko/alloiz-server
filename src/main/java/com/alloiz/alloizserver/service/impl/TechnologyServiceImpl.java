@@ -44,7 +44,7 @@ public class TechnologyServiceImpl implements TechnologyService {
         return save(findOne(technologies.getId())
                     .setName(technologies.getName())
                     .setImage(technologies.getImage())
-                    .setDescription(technologies.getDescription())
+                    .setDescriptions(technologies.getDescriptions())
                     .setAvailable(technologies.getAvailable()));
     }
 

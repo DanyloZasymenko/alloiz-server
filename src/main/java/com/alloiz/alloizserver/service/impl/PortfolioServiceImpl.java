@@ -43,7 +43,7 @@ public class PortfolioServiceImpl implements PortfolioService {
     return save(findOne(portfolio.getId())
         .setName(portfolio.getName())
         .setAvailable(portfolio.getAvailable())
-        .setDescription(portfolio.getDescription())
+        .setDescriptions(portfolio.getDescriptions())
         .setLink(portfolio.getLink())
         .setImages(portfolio.getImages())
     );
