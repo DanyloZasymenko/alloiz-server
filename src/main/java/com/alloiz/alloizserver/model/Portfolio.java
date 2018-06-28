@@ -1,12 +1,11 @@
 package com.alloiz.alloizserver.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Portfolio extends General<Portfolio>{
+public class Portfolio extends General<Portfolio> {
 
   private String link;
   private List<String> images;
@@ -14,32 +13,31 @@ public class Portfolio extends General<Portfolio>{
   @Column(columnDefinition = "LONGTEXT")
   private String description;
 
-  public Portfolio() {
-    images = new ArrayList<String>();
-  }
-
   public String getLink() {
     return link;
   }
 
-  public void setLink(String link) {
+  public Portfolio setLink(String link) {
     this.link = link;
+    return this;
   }
 
   public List<String> getImages() {
     return images;
   }
 
-  public void setImages(List<String> images) {
+  public Portfolio setImages(List<String> images) {
     this.images = images;
+    return this;
   }
 
   public String getDescription() {
     return description;
   }
 
-  public void setDescription(String description) {
+  public Portfolio setDescription(String description) {
     this.description = description;
+    return this;
   }
 
   @Override

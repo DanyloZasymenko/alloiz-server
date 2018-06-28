@@ -1,5 +1,8 @@
 package com.alloiz.alloizserver.model;
 
+import static java.util.stream.Collectors.toList;
+
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -11,17 +14,18 @@ public class Worker extends General<Worker> {
   private String image;
 
   @ManyToMany(cascade = CascadeType.REFRESH)
-  private Incumbency incumbency;
+  private List<Incumbency> incumbencies;
 
   public Worker() {
   }
 
-  public Incumbency getIncumbency() {
-    return incumbency;
+  public List<Incumbency> getIncumbencies() {
+    return incumbencies;
   }
 
-  public Worker setIncumbency(Incumbency incumbency) {
-    this.incumbency = incumbency;
+  public Worker setIncumbencies(
+      List<Incumbency> incumbencies) {
+    this.incumbencies = incumbencies;
     return this;
   }
 
@@ -59,7 +63,7 @@ public class Worker extends General<Worker> {
     return "Worker{" +
         "surname='" + surname + '\'' +
         ", image='" + image + '\'' +
-        ", incumbency=" + (incumbency == null? "null": incumbency) +
+        ", incumbency=" + incumbencies.stream().map(Incumbency::getName).collect(toList()) +
         ", id=" + id +
         ", name='" + name + '\'' +
         ", available=" + available +

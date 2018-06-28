@@ -15,7 +15,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 
   @Override
   public Portfolio findOneAvailable(Long id) {
-    return portfolioRepository.findByAvailableAndId(true,id);
+    return portfolioRepository.findByAvailableAndId(true, id);
   }
 
   @Override
@@ -39,10 +39,22 @@ public class PortfolioServiceImpl implements PortfolioService {
   }
 
   @Override
+  public Portfolio update(Portfolio portfolio) {
+    return save(findOne(portfolio.getId())
+        .setName(portfolio.getName())
+        .setAvailable(portfolio.getAvailable())
+        .setDescription(portfolio.getDescription())
+        .setLink(portfolio.getLink())
+        .setImages(portfolio.getImages())
+    );
+
+  }
+
+  @Override
   public Boolean deleteById(Long id) {
-    if(id != null && id >=0){
+    if (id != null && id >= 0) {
       Portfolio portfolio = portfolioRepository.findOne(id);
-      if(portfolio != null){
+      if (portfolio != null) {
         portfolioRepository.delete(portfolio);
         return true;
       } else {
