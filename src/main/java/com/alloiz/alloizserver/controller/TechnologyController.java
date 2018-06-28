@@ -56,6 +56,10 @@ public class TechnologyController {
         return ResponseEntity.ok(map(technologyService.update(map(technology, Technology.class)), TechnologyDto.class));
     }
 
+    @PostMapping("/update-image/{id}")
+    private ResponseEntity<TechnologyDto> updateImage(@RequestParam MultipartFile multipartFile, @PathVariable Long id) {
+        return ResponseEntity.ok(map(technologyService.updateImage(multipartFile, id), TechnologyDto.class));
+    }
 
     @DeleteMapping("/delete/{id}")
     private ResponseEntity delete(@PathVariable Long id) {
