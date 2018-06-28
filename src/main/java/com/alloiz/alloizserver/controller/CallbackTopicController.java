@@ -22,40 +22,39 @@ public class CallbackTopicController {
     private CallbackTopicService callbackTopicService;
 
     @GetMapping("/find-all")
-    private ResponseEntity<List<CallbackTopicShortDto>> findAll(){
+    private ResponseEntity<List<CallbackTopicShortDto>> findAll() {
         return ResponseEntity.ok(callbackTopicService.findAll().stream()
-                .map(callbackTopic -> map(callbackTopic,CallbackTopicShortDto.class)).collect(Collectors.toList()));
+                .map(callbackTopic -> map(callbackTopic, CallbackTopicShortDto.class)).collect(Collectors.toList()));
     }
 
     @GetMapping("/find-all-available")
-    private ResponseEntity<List<CallbackTopicShortDto>> findAllAvailable(){
+    private ResponseEntity<List<CallbackTopicShortDto>> findAllAvailable() {
         return ResponseEntity.ok(callbackTopicService.findAllAvailable().stream()
-                .map(callbackTopic -> map(callbackTopic,CallbackTopicShortDto.class)).collect(Collectors.toList()));
+                .map(callbackTopic -> map(callbackTopic, CallbackTopicShortDto.class)).collect(Collectors.toList()));
     }
 
     @GetMapping("/find-one-available/{id}")
-    private ResponseEntity<CallbackTopicFullDto> findOneAvailale(@PathVariable Long id){
-        return ResponseEntity.ok(map(callbackTopicService.findOneAvailable(id),CallbackTopicFullDto.class));
+    private ResponseEntity<CallbackTopicFullDto> findOneAvailale(@PathVariable Long id) {
+        return ResponseEntity.ok(map(callbackTopicService.findOneAvailable(id), CallbackTopicFullDto.class));
     }
 
-
     @GetMapping("/find-one/{id}")
-    private ResponseEntity<CallbackTopicFullDto> findOne(@PathVariable Long id){
-        return ResponseEntity.ok(map(callbackTopicService.findOne(id),CallbackTopicFullDto.class));
+    private ResponseEntity<CallbackTopicFullDto> findOne(@PathVariable Long id) {
+        return ResponseEntity.ok(map(callbackTopicService.findOne(id), CallbackTopicFullDto.class));
     }
 
     @PostMapping("/save")
-    private ResponseEntity<CallbackTopicFullDto> save(@RequestBody CallbackTopicFullDto callbackTopicFullDto) {
-        return ResponseEntity.ok(map(callbackTopicService.save(map(callbackTopicFullDto, CallbackTopic.class)), CallbackTopicFullDto.class));
+    private ResponseEntity<CallbackTopicFullDto> save(@RequestBody CallbackTopicFullDto callbackTopic) {
+        return ResponseEntity.ok(map(callbackTopicService.save(map(callbackTopic, CallbackTopic.class)), CallbackTopicFullDto.class));
     }
 
     @PostMapping("/update")
-    private ResponseEntity<CallbackTopicFullDto> update(@RequestBody CallbackTopicFullDto callbackTopicFullDto) {
-        return ResponseEntity.ok(map(callbackTopicService.update(map(callbackTopicFullDto, CallbackTopic.class)), CallbackTopicFullDto.class));
+    private ResponseEntity<CallbackTopicFullDto> update(@RequestBody CallbackTopicFullDto callbackTopic) {
+        return ResponseEntity.ok(map(callbackTopicService.update(map(callbackTopic, CallbackTopic.class)), CallbackTopicFullDto.class));
     }
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity delete(@PathVariable Long id){
-        return new ResponseEntity(map(callbackTopicService.delete(id) ? HttpStatus.OK:HttpStatus.CONFLICT));
+    private ResponseEntity delete(@PathVariable Long id) {
+        return new ResponseEntity(map(callbackTopicService.delete(id) ? HttpStatus.OK : HttpStatus.CONFLICT));
     }
 }

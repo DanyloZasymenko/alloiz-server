@@ -21,42 +21,42 @@ public class TechnologyController {
     private TechnologyService technologyService;
 
     @GetMapping("/find-all")
-    private ResponseEntity<List<TechnologyDto>> findAll(){
+    private ResponseEntity<List<TechnologyDto>> findAll() {
         return ResponseEntity.ok(technologyService.findAll().stream()
-                .map(callback -> map(callback,TechnologyDto.class)).collect(Collectors.toList()));
+                .map(callback -> map(callback, TechnologyDto.class)).collect(Collectors.toList()));
     }
 
     @GetMapping("/find-all-available")
-    private ResponseEntity<List<TechnologyDto>> findAllAvailable(){
+    private ResponseEntity<List<TechnologyDto>> findAllAvailable() {
         return ResponseEntity.ok(technologyService.findAllAvailable().stream()
-                .map(callback -> map(callback,TechnologyDto.class)).collect(Collectors.toList()));
+                .map(callback -> map(callback, TechnologyDto.class)).collect(Collectors.toList()));
     }
 
     @GetMapping("/find-one-available/{id}")
-    private ResponseEntity<TechnologyDto> findOneAvailale(@PathVariable Long id){
-        return ResponseEntity.ok(map(technologyService.findOneAvailable(id),TechnologyDto.class));
+    private ResponseEntity<TechnologyDto> findOneAvailale(@PathVariable Long id) {
+        return ResponseEntity.ok(map(technologyService.findOneAvailable(id), TechnologyDto.class));
     }
 
 
     @GetMapping("/find-one/{id}")
-    private ResponseEntity<TechnologyDto> findOne(@PathVariable Long id){
-        return ResponseEntity.ok(map(technologyService.findOne(id),TechnologyDto.class));
+    private ResponseEntity<TechnologyDto> findOne(@PathVariable Long id) {
+        return ResponseEntity.ok(map(technologyService.findOne(id), TechnologyDto.class));
     }
 
 
     @PostMapping("/save")
-    private ResponseEntity<TechnologyDto> save(@RequestBody TechnologyDto TechnologyDto) {
-        return ResponseEntity.ok(map(technologyService.save(map(TechnologyDto, Technology.class)), TechnologyDto.class));
+    private ResponseEntity<TechnologyDto> save(@RequestBody TechnologyDto technology) {
+        return ResponseEntity.ok(map(technologyService.save(map(technology, Technology.class)), TechnologyDto.class));
     }
 
     @PostMapping("/update")
-    private ResponseEntity<TechnologyDto> update(@RequestBody TechnologyDto TechnologyDto) {
-        return ResponseEntity.ok(map(technologyService.update(map(TechnologyDto, Technology.class)), TechnologyDto.class));
+    private ResponseEntity<TechnologyDto> update(@RequestBody TechnologyDto technology) {
+        return ResponseEntity.ok(map(technologyService.update(map(technology, Technology.class)), TechnologyDto.class));
     }
 
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity delete(@PathVariable Long id){
-        return new ResponseEntity(map(technologyService.delete(id) ? HttpStatus.OK:HttpStatus.CONFLICT));
+    private ResponseEntity delete(@PathVariable Long id) {
+        return new ResponseEntity(map(technologyService.delete(id) ? HttpStatus.OK : HttpStatus.CONFLICT));
     }
 }

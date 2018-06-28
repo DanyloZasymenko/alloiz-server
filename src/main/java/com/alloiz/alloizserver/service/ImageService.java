@@ -1,6 +1,7 @@
 package com.alloiz.alloizserver.service;
 
 import com.alloiz.alloizserver.model.Image;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface ImageService {
     List<Image> findAll();
 
     Image save(Image image);
+
+    Image save(MultipartFile multipartFile);
 
     Image update(Image image);
 

@@ -1,6 +1,7 @@
 package com.alloiz.alloizserver.service;
 
 import com.alloiz.alloizserver.model.Worker;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,7 +16,11 @@ public interface WorkerService {
 
     Worker save(Worker worker);
 
+    Worker save(String workerJson, MultipartFile multipartFile);
+
     Worker update(Worker worker);
+
+    Worker updateImage(MultipartFile multipartFile, Long id);
 
     Boolean delete(Long id);
 }

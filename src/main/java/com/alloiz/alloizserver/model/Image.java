@@ -21,6 +21,15 @@ public class Image extends GeneralName<Image> {
         return this;
     }
 
+    public Portfolio getPortfolio() {
+        return portfolio;
+    }
+
+    public Image setPortfolio(Portfolio portfolio) {
+        this.portfolio = portfolio;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Image{" +
