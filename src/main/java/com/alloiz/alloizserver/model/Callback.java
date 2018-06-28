@@ -5,10 +5,7 @@ import com.alloiz.alloizserver.model.utils.DateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -22,7 +19,7 @@ public class Callback extends General<Callback> {
     @Column(columnDefinition = "LONGTEXT")
     private String message;
 
-    @OneToMany(mappedBy = "callback", cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private CallbackTopic callbackTopic;
 
     public String getEmail() {
