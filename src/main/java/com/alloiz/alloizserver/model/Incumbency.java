@@ -3,7 +3,7 @@ package com.alloiz.alloizserver.model;
 import javax.persistence.Entity;
 
 @Entity
-public class Incumbency extends General<Incumbency> {
+public class Incumbency extends GeneralName<Incumbency> {
 
   private Boolean isOpen;
 

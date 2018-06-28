@@ -1,16 +1,19 @@
 package com.alloiz.alloizserver.model;
 
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity
-public class Technology extends General<Technology>{
+public class Technology extends GeneralName<Technology> {
 
     private String image;
 
-    @Column(columnDefinition = "LONGTEXT")
-    private String description;
+    @OneToMany(mappedBy = "technology")
+    private List<TechnologyDescription> technologyDescriptions;
 
     public Technology() {
     }
@@ -24,12 +27,12 @@ public class Technology extends General<Technology>{
         return this;
     }
 
-    public String getDescription() {
-        return description;
+    public List<TechnologyDescription> getTechnologyDescriptions() {
+        return technologyDescriptions;
     }
 
-    public Technology setDescription(String description) {
-        this.description = description;
+    public Technology setTechnologyDescriptions(List<TechnologyDescription> technologyDescriptions) {
+        this.technologyDescriptions = technologyDescriptions;
         return this;
     }
 
@@ -37,7 +40,7 @@ public class Technology extends General<Technology>{
     public String toString() {
         return "Technology{" +
                 "image='" + image + '\'' +
-                ", description='" + description + '\'' +
+                ", technologyDescriptions=" + technologyDescriptions.stream().map(TechnologyDescription::getId).collect(toList()) +
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", available=" + available +

@@ -1,54 +1,59 @@
 package com.alloiz.alloizserver.model;
 
-import java.util.List;
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity
-public class Portfolio extends General<Portfolio> {
+public class Portfolio extends GeneralName<Portfolio> {
 
-  private String link;
-  private List<String> images;
+    private String link;
 
-  @Column(columnDefinition = "LONGTEXT")
-  private String description;
+    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.REMOVE)
+    private List<Image> images;
 
-  public String getLink() {
-    return link;
-  }
+    @OneToMany(mappedBy = "portfolio")
+    private List<PortfolioDescription> portfolioDescriptions;
 
-  public Portfolio setLink(String link) {
-    this.link = link;
-    return this;
-  }
+    public String getLink() {
+        return link;
+    }
 
-  public List<String> getImages() {
-    return images;
-  }
+    public Portfolio setLink(String link) {
+        this.link = link;
+        return this;
+    }
 
-  public Portfolio setImages(List<String> images) {
-    this.images = images;
-    return this;
-  }
+    public List<Image> getImages() {
+        return images;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public Portfolio setImages(List<Image> images) {
+        this.images = images;
+        return this;
+    }
 
-  public Portfolio setDescription(String description) {
-    this.description = description;
-    return this;
-  }
+    public List<PortfolioDescription> getPortfolioDescriptions() {
+        return portfolioDescriptions;
+    }
 
-  @Override
-  public String toString() {
-    return "Portfolio{" +
-        "link='" + link + '\'' +
-        ", images=" + images +
-        ", description='" + description + '\'' +
-        ", id=" + id +
-        ", name='" + name + '\'' +
-        ", available=" + available +
-        "} " + super.toString();
-  }
+    public Portfolio setPortfolioDescriptions(List<PortfolioDescription> portfolioDescriptions) {
+        this.portfolioDescriptions = portfolioDescriptions;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Portfolio{" +
+                "link='" + link + '\'' +
+                ", images=" + images.stream().map(Image::getId).collect(toList()) +
+                ", portfolioDescriptions=" + portfolioDescriptions.stream().map(PortfolioDescription::getId).collect(toList()) +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", available=" + available +
+                '}';
+    }
 }

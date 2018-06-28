@@ -6,7 +6,7 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class CallbackTopic extends General<CallbackTopic> {
+public class CallbackTopic extends GeneralName<CallbackTopic> {
 
     @OneToMany(mappedBy = "callbackTopic", cascade = CascadeType.REFRESH)
     private List<Callback> callbacks;

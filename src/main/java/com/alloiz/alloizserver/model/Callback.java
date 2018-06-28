@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-public class Callback extends General<Callback> {
+public class Callback extends GeneralName<Callback> {
 
     private String email;
     private String phone;

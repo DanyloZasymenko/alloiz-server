@@ -1,16 +1,16 @@
 package com.alloiz.alloizserver.repository;
 
 import com.alloiz.alloizserver.model.Image;
-import com.alloiz.alloizserver.model.Incumbency;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface ImageRepository extends JpaRepository<Image,Long> {
+public interface ImageRepository extends JpaRepository<Image, Long> {
 
-  List<Image> findAllByAvailable(Boolean available);
+    List<Image> findAllByAvailable(Boolean available);
 
-  Image findByAvailableAndId(Boolean available, Long id);
+    Image findByAvailableAndId(Boolean available, Long id);
 
 }

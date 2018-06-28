@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Worker extends General<Worker> {
+public class Worker extends GeneralName<Worker> {
 
   private String surname;
   private String image;
