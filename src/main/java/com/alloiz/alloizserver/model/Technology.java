@@ -13,7 +13,7 @@ public class Technology extends GeneralName<Technology> {
     private String image;
 
     @OneToMany(mappedBy = "technology")
-    private List<TechnologyDescription> technologyDescriptions;
+    private List<TechnologyDescription> descriptions;
 
     public Technology() {
     }
@@ -27,12 +27,12 @@ public class Technology extends GeneralName<Technology> {
         return this;
     }
 
-    public List<TechnologyDescription> getTechnologyDescriptions() {
-        return technologyDescriptions;
+    public List<TechnologyDescription> getDescriptions() {
+        return descriptions;
     }
 
-    public Technology setTechnologyDescriptions(List<TechnologyDescription> technologyDescriptions) {
-        this.technologyDescriptions = technologyDescriptions;
+    public Technology setDescriptions(List<TechnologyDescription> descriptions) {
+        this.descriptions = descriptions;
         return this;
     }
 
@@ -40,7 +40,7 @@ public class Technology extends GeneralName<Technology> {
     public String toString() {
         return "Technology{" +
                 "image='" + image + '\'' +
-                ", technologyDescriptions=" + technologyDescriptions.stream().map(TechnologyDescription::getId).collect(toList()) +
+                ", descriptions=" + descriptions.stream().map(TechnologyDescription::getId).collect(toList()) +
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", available=" + available +

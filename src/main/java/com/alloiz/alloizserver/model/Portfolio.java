@@ -16,7 +16,7 @@ public class Portfolio extends GeneralName<Portfolio> {
     private List<Image> images;
 
     @OneToMany(mappedBy = "portfolio")
-    private List<PortfolioDescription> portfolioDescriptions;
+    private List<PortfolioDescription> descriptions;
 
     public String getLink() {
         return link;
@@ -36,12 +36,12 @@ public class Portfolio extends GeneralName<Portfolio> {
         return this;
     }
 
-    public List<PortfolioDescription> getPortfolioDescriptions() {
-        return portfolioDescriptions;
+    public List<PortfolioDescription> getDescriptions() {
+        return descriptions;
     }
 
-    public Portfolio setPortfolioDescriptions(List<PortfolioDescription> portfolioDescriptions) {
-        this.portfolioDescriptions = portfolioDescriptions;
+    public Portfolio setDescriptions(List<PortfolioDescription> descriptions) {
+        this.descriptions = descriptions;
         return this;
     }
 
@@ -50,7 +50,7 @@ public class Portfolio extends GeneralName<Portfolio> {
         return "Portfolio{" +
                 "link='" + link + '\'' +
                 ", images=" + images.stream().map(Image::getId).collect(toList()) +
-                ", portfolioDescriptions=" + portfolioDescriptions.stream().map(PortfolioDescription::getId).collect(toList()) +
+                ", descriptions=" + descriptions.stream().map(PortfolioDescription::getId).collect(toList()) +
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", available=" + available +
