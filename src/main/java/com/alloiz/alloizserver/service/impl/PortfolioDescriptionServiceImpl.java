@@ -35,7 +35,7 @@ public class PortfolioDescriptionServiceImpl implements PortfolioDescriptionServ
 
   @Override
   public PortfolioDescription save(PortfolioDescription portfolio) {
-    return portfolioDescriptionRepository.save(portfolio).setAvailable(true);
+    return portfolioDescriptionRepository.save(portfolio.setAvailable(true));
   }
 
   @Override
