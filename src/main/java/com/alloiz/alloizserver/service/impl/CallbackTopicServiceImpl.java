@@ -36,7 +36,7 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
 
     @Override
     public CallbackTopic save(CallbackTopic callbackTopic) {
-        return callbackTopicRepository.save(callbackTopic);
+        return callbackTopicRepository.save(callbackTopic.setAvailable(true));
     }
 
     @Override

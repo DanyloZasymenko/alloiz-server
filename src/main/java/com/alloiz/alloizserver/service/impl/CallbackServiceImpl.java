@@ -38,7 +38,9 @@ public class CallbackServiceImpl implements CallbackService {
 
     @Override
     public Callback save(Callback callback) {
-       return callbackRepository.save(callback.setDatetime(Timestamp.valueOf(LocalDateTime.now())));
+       return callbackRepository.save(callback
+               .setDatetime(Timestamp.valueOf(LocalDateTime.now()))
+               .setAvailable(true));
     }
 
     @Override
