@@ -42,6 +42,13 @@ public class CallbackServiceImpl implements CallbackService {
     }
 
     @Override
+    public Callback upadate(Callback callback) {
+        return save(findOne(callback.getId())
+                    .setPhone(callback.getPhone())
+                    .setAvailable(callback.getAvailable()));
+    }
+
+    @Override
     public Boolean delete(Long id) {
         if(id != null && id >= 0){
             Callback callback = callbackRepository.findOne(id);

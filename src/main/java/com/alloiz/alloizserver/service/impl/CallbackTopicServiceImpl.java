@@ -40,6 +40,13 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
     }
 
     @Override
+    public CallbackTopic upadate(CallbackTopic callbackTopic) {
+        return save(findOne(callbackTopic.getId())
+                    .setName(callbackTopic.getName())
+                    .setAvailable(callbackTopic.getAvailable()));
+    }
+
+    @Override
     public Boolean delete(Long id) {
         if (id != null && id >= 0) {
             CallbackTopic callbackTopic = callbackTopicRepository.findOne(id);

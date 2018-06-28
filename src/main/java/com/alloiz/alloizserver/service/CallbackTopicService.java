@@ -15,5 +15,7 @@ public interface CallbackTopicService {
 
   CallbackTopic save(CallbackTopic callbackTopic);
 
+  CallbackTopic upadate(CallbackTopic callbackTopic);
+
   Boolean delete(Long id);
 }

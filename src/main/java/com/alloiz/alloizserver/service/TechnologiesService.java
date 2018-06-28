@@ -16,6 +16,8 @@ public interface TechnologiesService {
 
     Technologies save(Technologies technologies);
 
+    Technologies update(Technologies technologies);
+
     Boolean delete(Long id);
 }
 

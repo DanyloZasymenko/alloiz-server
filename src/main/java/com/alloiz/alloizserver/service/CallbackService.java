@@ -16,5 +16,7 @@ public interface CallbackService {
 
     Callback save(Callback callback);
 
+    Callback upadate(Callback upadate);
+
     Boolean delete(Long id);
 }

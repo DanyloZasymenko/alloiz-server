@@ -40,6 +40,15 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
+    public Worker update(Worker worker) {
+        return save(findOne(worker.getId())
+                    .setName(worker.getName())
+                    .setSurname(worker.getName())
+                    .setImage(worker.getImage())
+                    .setAvailable(worker.getAvailable() ));
+    }
+
+    @Override
     public Boolean delete(Long id) {
         if(id != null && id >= 0){
             Worker worker = workerRepository.findOne(id);

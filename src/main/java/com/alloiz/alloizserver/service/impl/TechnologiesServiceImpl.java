@@ -40,6 +40,15 @@ public class TechnologiesServiceImpl implements TechnologiesService {
     }
 
     @Override
+    public Technologies update(Technologies technologies) {
+        return save(findOne(technologies.getId())
+                    .setName(technologies.getName())
+                    .setImage(technologies.getImage())
+                    .setDescription(technologies.getDescription())
+                    .setAvailable(technologies.getAvailable()));
+    }
+
+    @Override
     public Boolean delete(Long id) {
        if(id != null && id >= 0){
            Technologies technologies = technologiesRepository.findOne(id);
