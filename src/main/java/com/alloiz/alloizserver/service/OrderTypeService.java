@@ -15,5 +15,5 @@ public interface OrderTypeService {
 
   OrderType save(OrderType orderType);
 
-  Boolean deleteById(Long id);
+  Boolean delete(Long id);
 }
