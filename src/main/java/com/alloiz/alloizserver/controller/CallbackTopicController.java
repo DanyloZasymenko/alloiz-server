@@ -44,10 +44,14 @@ public class CallbackTopicController {
         return ResponseEntity.ok(map(callbackTopicService.findOne(id),CallbackTopicFullDto.class));
     }
 
-
     @PostMapping("/save")
     private ResponseEntity<CallbackTopicFullDto> save(@RequestBody CallbackTopicFullDto callbackTopicFullDto) {
         return ResponseEntity.ok(map(callbackTopicService.save(map(callbackTopicFullDto, CallbackTopic.class)), CallbackTopicFullDto.class));
+    }
+
+    @PostMapping("/update")
+    private ResponseEntity<CallbackTopicFullDto> update(@RequestBody CallbackTopicFullDto callbackTopicFullDto) {
+        return ResponseEntity.ok(map(callbackTopicService.update(map(callbackTopicFullDto, CallbackTopic.class)), CallbackTopicFullDto.class));
     }
 
     @DeleteMapping("/delete/{id}")

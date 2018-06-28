@@ -1,8 +1,11 @@
 package com.alloiz.alloizserver.controller;
 
+import com.alloiz.alloizserver.dto.PortfolioDto;
 import com.alloiz.alloizserver.model.Portfolio;
 import com.alloiz.alloizserver.service.PortfolioService;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.alloiz.alloizserver.dto.utils.builder.Builder.map;
+
 @RestController
 @RequestMapping("/portfolio")
 public class PortfolioController {
@@ -22,34 +27,42 @@ public class PortfolioController {
   private PortfolioService portfolioService;
 
   @GetMapping("/find-all")
-  private ResponseEntity<List<Portfolio>> findAll() {
-    return ResponseEntity.ok(portfolioService.findAll());
+  private ResponseEntity<List<PortfolioDto>> findAll(){
+    return ResponseEntity.ok(portfolioService.findAll().stream()
+            .map(callback -> map(callback,PortfolioDto.class)).collect(Collectors.toList()));
   }
 
   @GetMapping("/find-all-available")
-  private ResponseEntity<List<Portfolio>> findAllAvailable() {
-    return ResponseEntity.ok(portfolioService.findAllAvailable());
+  private ResponseEntity<List<PortfolioDto>> findAllAvailable(){
+    return ResponseEntity.ok(portfolioService.findAllAvailable().stream()
+            .map(callback -> map(callback,PortfolioDto.class)).collect(Collectors.toList()));
   }
 
   @GetMapping("/find-one-available/{id}")
-  private ResponseEntity<Portfolio> findOneAvailale(@PathVariable Long id) {
-    return ResponseEntity.ok(portfolioService.findOneAvailable(id));
+  private ResponseEntity<PortfolioDto> findOneAvailale(@PathVariable Long id){
+    return ResponseEntity.ok(map(portfolioService.findOneAvailable(id),PortfolioDto.class));
   }
+
 
   @GetMapping("/find-one/{id}")
-  private ResponseEntity<Portfolio> findOne(@PathVariable Long id) {
-    return ResponseEntity.ok(portfolioService.findOne(id));
+  private ResponseEntity<PortfolioDto> findOne(@PathVariable Long id){
+    return ResponseEntity.ok(map(portfolioService.findOne(id),PortfolioDto.class));
   }
 
+
   @PostMapping("/save")
-  private ResponseEntity<Portfolio> save(@RequestBody Portfolio portfolio) {
-    return ResponseEntity.ok(portfolioService.save(portfolio));
+  private ResponseEntity<PortfolioDto> save(@RequestBody PortfolioDto PortfolioDto) {
+    return ResponseEntity.ok(map(portfolioService.save(map(PortfolioDto, Portfolio.class)), PortfolioDto.class));
+  }
+
+  @PostMapping("/update")
+  private ResponseEntity<PortfolioDto> update(@RequestBody PortfolioDto PortfolioDto) {
+    return ResponseEntity.ok(map(portfolioService.update(map(PortfolioDto, Portfolio.class)), PortfolioDto.class));
   }
 
   @DeleteMapping("/delete/{id}")
-  private ResponseEntity delete(@PathVariable Long id) {
-    return ResponseEntity
-        .status(portfolioService.deleteById(id) ? HttpStatus.OK : HttpStatus.CONFLICT).build();
+  private ResponseEntity delete(@PathVariable Long id){
+    return new ResponseEntity(map(portfolioService.deleteById(id) ? HttpStatus.OK:HttpStatus.CONFLICT));
   }
 
 }

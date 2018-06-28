@@ -49,6 +49,11 @@ public class WorkerController {
         return ResponseEntity.ok(map(workerService.save(map(workerShortDto, Worker.class)), WorkerShortDto.class));
     }
 
+    @PostMapping("/update")
+    private ResponseEntity<WorkerShortDto> update(@RequestBody WorkerShortDto workerShortDto) {
+        return ResponseEntity.ok(map(workerService.update(map(workerShortDto, Worker.class)), WorkerShortDto.class));
+    }
+
     @DeleteMapping("/delete/{id}")
     private ResponseEntity delete(@PathVariable Long id){
         return new ResponseEntity(map(workerService.delete(id) ? HttpStatus.OK:HttpStatus.CONFLICT));

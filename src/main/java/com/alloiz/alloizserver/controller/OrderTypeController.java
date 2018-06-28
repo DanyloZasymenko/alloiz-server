@@ -38,9 +38,9 @@ public class OrderTypeController {
     }
 
 
-    @PostMapping("/save")
-    private ResponseEntity<OrderType> save(@RequestBody OrderType orderType) {
-        return ResponseEntity.ok(orderTypeService.save(orderType));
+    @PostMapping("/update")
+    private ResponseEntity<OrderType> update(@RequestBody OrderType orderType) {
+        return ResponseEntity.ok(orderTypeService.update(orderType));
     }
 
     @DeleteMapping("/delete/{id}")
