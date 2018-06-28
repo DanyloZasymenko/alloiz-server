@@ -49,10 +49,10 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public Portfolio save(String portfolioJson, MultipartFile[] multipartFiles) {
-        Portfolio portfolio = json(portfolioJson, Portfolio.class);
+        Portfolio portfolio = save(json(portfolioJson, Portfolio.class));
         List<Image> images = new ArrayList<>();
         for (MultipartFile file : multipartFiles) {
-            images.add(imageService.save(file));
+            images.add(imageService.save(file, portfolio));
         }
         return save(portfolio.setImages(images));
     }

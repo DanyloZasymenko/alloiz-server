@@ -1,8 +1,10 @@
 package com.alloiz.alloizserver.service.impl;
 
 import com.alloiz.alloizserver.model.Image;
+import com.alloiz.alloizserver.model.Portfolio;
 import com.alloiz.alloizserver.repository.ImageRepository;
 import com.alloiz.alloizserver.service.ImageService;
+import com.alloiz.alloizserver.service.PortfolioService;
 import com.alloiz.alloizserver.service.utils.FileBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class ImageServiceImpl implements ImageService {
 
     @Autowired
     private FileBuilder fileBuilder;
+
+    @Autowired
+    private PortfolioService portfolioService;
 
     @Override
     public Image findOneAvailable(Long id) {
@@ -49,6 +54,15 @@ public class ImageServiceImpl implements ImageService {
         return imageRepository.save(new Image()
                 .setPath(fileBuilder.saveFile(multipartFile))
                 .setAvailable(true)
+                .setName(multipartFile.getOriginalFilename()));
+    }
+
+    @Override
+    public Image save(MultipartFile multipartFile, Portfolio portfolio) {
+        return imageRepository.save(new Image()
+                .setPath(fileBuilder.saveFile(multipartFile))
+                .setAvailable(true)
+                .setPortfolio(portfolio)
                 .setName(multipartFile.getOriginalFilename()));
     }
 

@@ -1,6 +1,7 @@
 package com.alloiz.alloizserver.service;
 
 import com.alloiz.alloizserver.model.Image;
+import com.alloiz.alloizserver.model.Portfolio;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -18,6 +19,8 @@ public interface ImageService {
     Image save(Image image);
 
     Image save(MultipartFile multipartFile);
+
+    Image save(MultipartFile multipartFile, Portfolio portfolio);
 
     Image update(Image image);
 
