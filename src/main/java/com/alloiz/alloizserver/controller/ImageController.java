@@ -60,8 +60,8 @@ public class ImageController {
   }
 
   @PostMapping("/update")
-  private ResponseEntity<ImageDto> update(@RequestBody ImageDto PortfolioDto) {
-    return ResponseEntity.ok(map(imageService.update(map(PortfolioDto, Image.class)), ImageDto.class));
+  private ResponseEntity<ImageDto> update(@RequestBody ImageDto imageDto) {
+    return ResponseEntity.ok(map(imageService.update(map(imageDto, Image.class)), ImageDto.class));
   }
 
 }
