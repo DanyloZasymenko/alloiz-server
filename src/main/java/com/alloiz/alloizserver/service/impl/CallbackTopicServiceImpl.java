@@ -40,7 +40,7 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
     }
 
     @Override
-    public CallbackTopic upadate(CallbackTopic callbackTopic) {
+    public CallbackTopic update(CallbackTopic callbackTopic) {
         return save(findOne(callbackTopic.getId())
                     .setName(callbackTopic.getName())
                     .setAvailable(callbackTopic.getAvailable()));
