@@ -1,54 +1,68 @@
 package com.alloiz.alloizserver.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Worker extends General {
 
-    private String surname;
-    private String image;
+  private String surname;
+  private String image;
 
-    public Worker() {
-    }
+  @ManyToMany(cascade = CascadeType.REFRESH)
+  private Incumbency incumbency;
 
-    @Override
-    public String getName() {
-        return name;
-    }
+  public Worker() {
+  }
 
-    @Override
-    public Worker setName(String name) {
-        this.name = name;
-        return this;
-    }
+  public Incumbency getIncumbency() {
+    return incumbency;
+  }
 
-    public String getSurname() {
-        return surname;
-    }
+  public Worker setIncumbency(Incumbency incumbency) {
+    this.incumbency = incumbency;
+    return this;
+  }
 
-    public Worker setSurname(String surname) {
-        this.surname = surname;
-        return this;
-    }
+  @Override
+  public String getName() {
+    return name;
+  }
 
-    public String getImage() {
-        return image;
-    }
+  @Override
+  public Worker setName(String name) {
+    this.name = name;
+    return this;
+  }
 
-    public Worker setImage(String image) {
-        this.image = image;
-        return this;
-    }
+  public String getSurname() {
+    return surname;
+  }
 
-    @Override
-    public String toString() {
-        return "Worker{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", image='" + image + '\'' +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", available=" + available +
-                '}';
-    }
+  public Worker setSurname(String surname) {
+    this.surname = surname;
+    return this;
+  }
+
+  public String getImage() {
+    return image;
+  }
+
+  public Worker setImage(String image) {
+    this.image = image;
+    return this;
+  }
+
+  @Override
+  public String toString() {
+    return "Worker{" +
+        "surname='" + surname + '\'' +
+        ", image='" + image + '\'' +
+        ", incumbency=" + (incumbency == null? "null": incumbency) +
+        ", id=" + id +
+        ", name='" + name + '\'' +
+        ", available=" + available +
+        "} " + super.toString();
+  }
 }
