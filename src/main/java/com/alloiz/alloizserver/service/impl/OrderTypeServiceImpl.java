@@ -54,4 +54,12 @@ public class OrderTypeServiceImpl implements OrderTypeService {
       throw new NullPointerException("Id is null or less than zero");
     }
   }
+
+  @Override
+  public OrderType update(OrderType orderType) {
+    return save(findOne(orderType.getId())
+        .setAvailable(orderType.getAvailable())
+        .setName(orderType.getName())
+    );
+  }
 }
