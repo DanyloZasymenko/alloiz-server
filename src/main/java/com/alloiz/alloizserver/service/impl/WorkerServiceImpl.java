@@ -45,7 +45,8 @@ public class WorkerServiceImpl implements WorkerService {
                     .setName(worker.getName())
                     .setSurname(worker.getName())
                     .setImage(worker.getImage())
-                    .setAvailable(worker.getAvailable() ));
+                    .setAvailable(worker.getAvailable())
+                    .setIncumbencies(worker.getIncumbencies()));
     }
 
     @Override
