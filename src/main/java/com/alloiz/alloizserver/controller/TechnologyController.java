@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,7 +46,8 @@ public class TechnologyController {
 
 
     @PostMapping("/save")
-    private ResponseEntity<TechnologyDto> save(@RequestBody TechnologyDto technology) {
+    private ResponseEntity<TechnologyDto> save(@RequestBody TechnologyDto technology,
+                                               @RequestParam MultipartFile multipartFile) {
         return ResponseEntity.ok(map(technologyService.save(map(technology, Technology.class)), TechnologyDto.class));
     }
 
