@@ -35,7 +35,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
 
   @Override
   public OrderType save(OrderType orderType) {
-    return orderTypeRepository.save(orderType);
+    return orderTypeRepository.save(orderType.setAvailable(true));
   }
 
   @Override

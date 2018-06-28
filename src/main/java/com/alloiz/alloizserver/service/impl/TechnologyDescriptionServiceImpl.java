@@ -36,7 +36,7 @@ public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionSe
 
     @Override
     public TechnologyDescription save(TechnologyDescription technologyDescription) {
-        return technologyDescriptionRepository.save(technologyDescription);
+        return technologyDescriptionRepository.save(technologyDescription).setAvailable(true);
     }
 
     @Override
