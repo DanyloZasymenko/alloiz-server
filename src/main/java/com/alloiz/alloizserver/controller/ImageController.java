@@ -44,8 +44,8 @@ public class ImageController {
     }
 
     @PostMapping("/save")
-    private ResponseEntity<ImageDto> save(@RequestBody MultipartFile multipartFile) {
-        return ResponseEntity.ok(map(imageService.save(multipartFile), ImageDto.class));
+    private ResponseEntity save(@RequestParam MultipartFile multipartFile) {
+        return ResponseEntity.ok(imageService.save(multipartFile));
     }
 
     @DeleteMapping("/delete/{id}")

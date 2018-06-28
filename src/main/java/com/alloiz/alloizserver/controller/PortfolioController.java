@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,16 +38,14 @@ public class PortfolioController {
         return ResponseEntity.ok(map(portfolioService.findOneAvailable(id), PortfolioDto.class));
     }
 
-
     @GetMapping("/find-one/{id}")
     private ResponseEntity<PortfolioDto> findOne(@PathVariable Long id) {
         return ResponseEntity.ok(map(portfolioService.findOne(id), PortfolioDto.class));
     }
 
-
     @PostMapping("/save")
-    private ResponseEntity<PortfolioDto> save(@RequestBody PortfolioDto portfolio) {
-        return ResponseEntity.ok(map(portfolioService.save(map(portfolio, Portfolio.class)), PortfolioDto.class));
+    private ResponseEntity<PortfolioDto> save(@RequestParam String portfolioJson, @RequestParam MultipartFile [] multipartFiles) {
+        return ResponseEntity.ok(map(portfolioService.save(portfolioJson, multipartFiles), PortfolioDto.class));
     }
 
     @PostMapping("/update")

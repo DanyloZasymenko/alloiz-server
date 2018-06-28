@@ -1,23 +1,27 @@
 package com.alloiz.alloizserver.service;
 
 import com.alloiz.alloizserver.model.Portfolio;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 
 public interface PortfolioService {
 
-  Portfolio findOneAvailable(Long id);
+    Portfolio findOneAvailable(Long id);
 
-  List<Portfolio> findAllAvailable();
+    List<Portfolio> findAllAvailable();
 
-  Portfolio findOne(Long id);
+    Portfolio findOne(Long id);
 
-  List<Portfolio> findAll();
+    List<Portfolio> findAll();
 
-  Portfolio save(Portfolio portfolio);
+    Portfolio save(String portfolioJson, MultipartFile[] multipartFiles);
 
-  Boolean deleteById(Long id);
+    Portfolio save(Portfolio portfolio);
 
-  Portfolio update(Portfolio portfolio);
+    Boolean deleteById(Long id);
+
+    Portfolio update(Portfolio portfolio);
 
 }
