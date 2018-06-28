@@ -39,7 +39,7 @@ public class IncumbencyServiceImpl implements IncumbencyService {
   }
 
   @Override
-  public Boolean deleteById(Long id) {
+  public Boolean delete(Long id) {
     if(id != null && id >= 0){
       Incumbency incumbency = incumbencyRepository.findOne(id);
       if(incumbency != null){

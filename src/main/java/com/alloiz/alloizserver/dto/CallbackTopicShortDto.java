@@ -3,14 +3,11 @@ package com.alloiz.alloizserver.dto;
 import com.alloiz.alloizserver.dto.utils.annotations.Dto;
 
 @Dto
-public class WorkerShortDto <T extends WorkerShortDto>{
+public class CallbackTopicShortDto<T extends CallbackTopicShortDto> {
 
     protected Long id;
     protected String name;
-    protected String surname;
-    protected String image;
     protected Boolean available;
-
 
     public Long getId() {
         return id;
@@ -30,24 +27,6 @@ public class WorkerShortDto <T extends WorkerShortDto>{
         return (T) this;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public T setSurname(String surname) {
-        this.surname = surname;
-        return (T) this;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public T setImage(String image) {
-        this.image = image;
-        return (T) this;
-    }
-
     public Boolean getAvailable() {
         return available;
     }
@@ -59,11 +38,10 @@ public class WorkerShortDto <T extends WorkerShortDto>{
 
     @Override
     public String toString() {
-        return "WorkerShortDto{" +
+        return "CallbackTopicShortDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", image='" + image + '\'' +
+                ", available=" + available +
                 '}';
     }
 }

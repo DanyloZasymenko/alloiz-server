@@ -15,5 +15,5 @@ public interface CallbackTopicService {
 
   CallbackTopic save(CallbackTopic callbackTopic);
 
-  Boolean deleteById(Long id);
+  Boolean delete(Long id);
 }
