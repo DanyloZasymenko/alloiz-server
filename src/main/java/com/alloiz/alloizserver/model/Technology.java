@@ -5,21 +5,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Technologies extends General<Technologies>{
+public class Technology extends General<Technology>{
 
     private String image;
 
     @Column(columnDefinition = "LONGTEXT")
     private String description;
 
-    public Technologies() {
+    public Technology() {
     }
 
     public String getImage() {
         return image;
     }
 
-    public Technologies setImage(String image) {
+    public Technology setImage(String image) {
         this.image = image;
         return this;
     }
@@ -28,14 +28,14 @@ public class Technologies extends General<Technologies>{
         return description;
     }
 
-    public Technologies setDescription(String description) {
+    public Technology setDescription(String description) {
         this.description = description;
         return this;
     }
 
     @Override
     public String toString() {
-        return "Technologies{" +
+        return "Technology{" +
                 "image='" + image + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
