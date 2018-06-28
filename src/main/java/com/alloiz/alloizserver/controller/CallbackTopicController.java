@@ -1,5 +1,6 @@
 package com.alloiz.alloizserver.controller;
 
+import com.alloiz.alloizserver.dto.CallbackTopicFullDto;
 import com.alloiz.alloizserver.dto.CallbackTopicShortDto;
 import com.alloiz.alloizserver.model.CallbackTopic;
 import com.alloiz.alloizserver.service.CallbackTopicService;
@@ -33,20 +34,20 @@ public class CallbackTopicController {
     }
 
     @GetMapping("/find-one-available/{id}")
-    private ResponseEntity<CallbackTopicShortDto> findOneAvailale(@PathVariable Long id){
-        return ResponseEntity.ok(map(callbackTopicService.findOneAvailable(id),CallbackTopicShortDto.class));
+    private ResponseEntity<CallbackTopicFullDto> findOneAvailale(@PathVariable Long id){
+        return ResponseEntity.ok(map(callbackTopicService.findOneAvailable(id),CallbackTopicFullDto.class));
     }
 
 
     @GetMapping("/find-one/{id}")
-    private ResponseEntity<CallbackTopicShortDto> findOne(@PathVariable Long id){
-        return ResponseEntity.ok(map(callbackTopicService.findOne(id),CallbackTopicShortDto.class));
+    private ResponseEntity<CallbackTopicFullDto> findOne(@PathVariable Long id){
+        return ResponseEntity.ok(map(callbackTopicService.findOne(id),CallbackTopicFullDto.class));
     }
 
 
     @PostMapping("/save")
-    private ResponseEntity<CallbackTopicShortDto> save(@RequestBody CallbackTopicShortDto callbackTopicShortDto) {
-        return ResponseEntity.ok(map(callbackTopicService.save(map(callbackTopicShortDto, CallbackTopic.class)), CallbackTopicShortDto.class));
+    private ResponseEntity<CallbackTopicFullDto> save(@RequestBody CallbackTopicFullDto callbackTopicFullDto) {
+        return ResponseEntity.ok(map(callbackTopicService.save(map(callbackTopicFullDto, CallbackTopic.class)), CallbackTopicFullDto.class));
     }
 
     @DeleteMapping("/delete/{id}")
