@@ -3,7 +3,7 @@ package com.alloiz.alloizserver.model;
 import javax.persistence.Entity;
 
 @Entity
-public class Incumbency extends General{
+public class Incumbency extends General<Incumbency> {
 
   private Boolean isOpen;
 
@@ -14,8 +14,9 @@ public class Incumbency extends General{
     return isOpen;
   }
 
-  public void setOpen(Boolean open) {
+  public Incumbency setOpen(Boolean open) {
     isOpen = open;
+    return this;
   }
 
   @Override

@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import java.sql.Timestamp;
 
 @Entity
-public class Callback extends General {
+public class Callback extends General<Callback> {
 
     private String email;
     private String phone;

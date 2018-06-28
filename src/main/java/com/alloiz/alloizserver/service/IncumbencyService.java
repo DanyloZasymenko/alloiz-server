@@ -16,4 +16,6 @@ public interface IncumbencyService {
   Incumbency save(Incumbency incumbency);
 
   Boolean delete(Long id);
+
+  Incumbency update(Incumbency incumbency);
 }

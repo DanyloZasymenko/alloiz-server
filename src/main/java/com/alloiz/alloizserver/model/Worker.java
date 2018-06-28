@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Worker extends General {
+public class Worker extends General<Worker> {
 
   private String surname;
   private String image;

@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class CallbackTopic extends General {
+public class CallbackTopic extends General<CallbackTopic> {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Callback callback;

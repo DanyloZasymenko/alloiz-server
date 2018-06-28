@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Portfolio extends General{
+public class Portfolio extends General<Portfolio>{
 
   private String link;
   private List<String> images;

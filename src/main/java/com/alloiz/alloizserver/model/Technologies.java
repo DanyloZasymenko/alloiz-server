@@ -5,7 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Technologies extends General{
+public class Technologies extends General<Technologies>{
 
     private String image;
 

@@ -15,7 +15,7 @@ public class IncumbencyServiceImpl implements IncumbencyService {
 
   @Override
   public Incumbency findOneAvailable(Long id) {
-    return incumbencyRepository.findByAvailableAndId(true,id);
+    return incumbencyRepository.findByAvailableAndId(true, id);
   }
 
   @Override
@@ -35,22 +35,28 @@ public class IncumbencyServiceImpl implements IncumbencyService {
 
   @Override
   public Incumbency save(Incumbency incumbency) {
-   return incumbencyRepository.save(incumbency);
+    return incumbencyRepository.save(incumbency);
+  }
+
+  @Override
+  public Incumbency update(Incumbency incumbency) {
+    return findOne(incumbency.getId())
+        .setAvailable(incumbency.getAvailable())
+        .setName(incumbency.getName())
+        .setOpen(incumbency.getOpen());
   }
 
   @Override
   public Boolean delete(Long id) {
-    if(id != null && id >= 0){
+    if (id != null && id >= 0) {
       Incumbency incumbency = incumbencyRepository.findOne(id);
-      if(incumbency != null){
+      if (incumbency != null) {
         incumbencyRepository.delete(incumbency);
         return true;
-      }
-      else {
+      } else {
         return false;
       }
-    }
-    else{
+    } else {
       throw new NullPointerException("Id is null or less than zero");
     }
   }

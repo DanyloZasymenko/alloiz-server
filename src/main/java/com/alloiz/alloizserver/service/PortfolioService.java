@@ -18,4 +18,6 @@ public interface PortfolioService {
 
   Boolean deleteById(Long id);
 
+  Portfolio uptade (Portfolio portfolio);
+
 }

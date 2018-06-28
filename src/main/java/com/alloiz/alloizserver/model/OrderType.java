@@ -3,7 +3,7 @@ package com.alloiz.alloizserver.model;
 import javax.persistence.Entity;
 
 @Entity
-public class OrderType extends General{
+public class OrderType extends General<OrderType>{
 
     public OrderType() {
     }
