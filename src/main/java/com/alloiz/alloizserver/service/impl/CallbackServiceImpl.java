@@ -42,7 +42,7 @@ public class CallbackServiceImpl implements CallbackService {
     }
 
     @Override
-    public Callback upadate(Callback callback) {
+    public Callback update(Callback callback) {
         return save(findOne(callback.getId())
                     .setPhone(callback.getPhone())
                     .setAvailable(callback.getAvailable()));

@@ -55,6 +55,11 @@ public class CallbackController {
     return ResponseEntity.ok(map(callbackService.save(map(callbackFullDto, Callback.class)), CallbackFullDto.class));
   }
 
+  @PostMapping("/update")
+  private ResponseEntity<CallbackFullDto> update(@RequestBody CallbackFullDto callbackFullDto) {
+    return ResponseEntity.ok(map(callbackService.update(map(callbackFullDto, Callback.class)), CallbackFullDto.class));
+  }
+
   @DeleteMapping("/delete/{id}")
   private ResponseEntity delete(@PathVariable Long id){
     return new ResponseEntity(map(callbackService.delete(id) ? HttpStatus.OK:HttpStatus.CONFLICT));

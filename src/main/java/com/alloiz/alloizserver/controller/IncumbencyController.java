@@ -37,10 +37,14 @@ public class IncumbencyController {
         return ResponseEntity.ok(incumbencyService.findOne(id));
     }
 
-
     @PostMapping("/save")
     private ResponseEntity<Incumbency> save(@RequestBody Incumbency incumbency) {
         return ResponseEntity.ok(incumbencyService.save(incumbency));
+    }
+
+    @PostMapping("/update")
+    private ResponseEntity<Incumbency> update(@RequestBody Incumbency incumbency) {
+        return ResponseEntity.ok(incumbencyService.update(incumbency));
     }
 
     @DeleteMapping("/delete/{id}")
