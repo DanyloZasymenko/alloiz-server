@@ -40,10 +40,10 @@ public class IncumbencyServiceImpl implements IncumbencyService {
 
   @Override
   public Incumbency update(Incumbency incumbency) {
-    return findOne(incumbency.getId())
+    return save(findOne(incumbency.getId())
         .setAvailable(incumbency.getAvailable())
         .setName(incumbency.getName())
-        .setOpen(incumbency.getOpen());
+        .setOpen(incumbency.getOpen()));
   }
 
   @Override
