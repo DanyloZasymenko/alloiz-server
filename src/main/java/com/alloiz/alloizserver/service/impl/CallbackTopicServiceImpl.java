@@ -26,7 +26,7 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
 
     @Override
     public CallbackTopic findOne(Long id) {
-        return callbackTopicRepository.getOne(id);
+        return callbackTopicRepository.findOne(id);
     }
 
     @Override
@@ -36,8 +36,7 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
 
     @Override
     public CallbackTopic save(CallbackTopic callbackTopic) {
-        callbackTopicRepository.save(callbackTopic);
-        return callbackTopic;
+        return callbackTopicRepository.save(callbackTopic);
     }
 
     @Override

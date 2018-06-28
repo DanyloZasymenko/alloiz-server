@@ -3,6 +3,8 @@ package com.alloiz.alloizserver.service.impl;
 import com.alloiz.alloizserver.model.Callback;
 import com.alloiz.alloizserver.repository.CallbackRepository;
 import com.alloiz.alloizserver.service.CallbackService;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +38,7 @@ public class CallbackServiceImpl implements CallbackService {
 
     @Override
     public Callback save(Callback callback) {
-       return callbackRepository.save(callback);
+       return callbackRepository.save(callback.setDatetime(Timestamp.valueOf(LocalDateTime.now())));
     }
 
     @Override
