@@ -46,9 +46,9 @@ public class TechnologyController {
 
 
     @PostMapping("/save")
-    private ResponseEntity<TechnologyDto> save(@RequestBody TechnologyDto technology,
-                                               @RequestParam MultipartFile multipartFile) {
-        return ResponseEntity.ok(map(technologyService.save(map(technology, Technology.class)), TechnologyDto.class));
+    private ResponseEntity<TechnologyDto> save(@RequestParam String technologyJson,
+                                               @RequestParam(required = false) MultipartFile multipartFile) {
+        return ResponseEntity.ok(map(technologyService.save(technologyJson, multipartFile), TechnologyDto.class));
     }
 
     @PostMapping("/update")
