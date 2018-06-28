@@ -36,7 +36,7 @@ public class TechnologyServiceImpl implements TechnologyService {
 
     @Override
     public Technology save(Technology technologies) {
-        return technologyRepository.save(technologies);
+        return technologyRepository.save(technologies).setAvailable(true);
     }
 
     @Override
