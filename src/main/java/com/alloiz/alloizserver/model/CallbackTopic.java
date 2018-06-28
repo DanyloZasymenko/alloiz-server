@@ -2,15 +2,22 @@ package com.alloiz.alloizserver.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class CallbackTopic extends General<CallbackTopic> {
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    private Callback callback;
+    @OneToMany(mappedBy = "callbackTopic", cascade = CascadeType.REFRESH)
+    private List<Callback> callbacks;
 
-    public CallbackTopic() {
+    public List<Callback> getCallbacks() {
+        return callbacks;
+    }
+
+    public CallbackTopic setCallbacks(List<Callback> callbacks) {
+        this.callbacks = callbacks;
+        return this;
     }
 
     @Override
