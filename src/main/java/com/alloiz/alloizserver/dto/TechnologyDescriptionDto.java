@@ -8,7 +8,6 @@ import com.alloiz.alloizserver.model.enums.Language;
 public class TechnologyDescriptionDto {
 
   protected Long id;
-  protected Technology technology;
   protected Language language;
   protected Boolean available;
   protected String description;
@@ -23,14 +22,6 @@ public class TechnologyDescriptionDto {
     return this;
   }
 
-  public Technology getTechnology() {
-    return technology;
-  }
-
-  public TechnologyDescriptionDto setTechnology(Technology technology) {
-    this.technology = technology;
-    return this;
-  }
 
   public Language getLanguage() {
     return language;
@@ -62,10 +53,10 @@ public class TechnologyDescriptionDto {
   @Override
   public String toString() {
     return "TechnologyDescriptionDto{" +
-        "technology=" + technology +
-        ", language=" + language +
-        ", id=" + id +
-        ", available=" + available +
-        '}';
+            "id=" + id +
+            ", language=" + language +
+            ", available=" + available +
+            ", description='" + description + '\'' +
+            '}';
   }
 }

@@ -1,6 +1,8 @@
 package com.alloiz.alloizserver.service.impl;
 
+import com.alloiz.alloizserver.dto.TechnologyDescriptionDto;
 import com.alloiz.alloizserver.model.Technology;
+import com.alloiz.alloizserver.model.TechnologyDescription;
 import com.alloiz.alloizserver.repository.TechnologyRepository;
 import com.alloiz.alloizserver.service.TechnologyService;
 import com.alloiz.alloizserver.service.utils.FileBuilder;
@@ -73,7 +75,7 @@ public class TechnologyServiceImpl implements TechnologyService {
 
         technology.setDescriptions(technology.getDescriptions().stream()
                 .map(technologyDescription -> technologyDescription
-                        .setTechnology(map(technology))).collect(Collectors.toList()));
+                        .setTechnology(technology)).collect(Collectors.toList()));
 
         if (multipartFile != null)
             technology.setImage(fileBuilder.saveFile(multipartFile));
