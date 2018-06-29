@@ -25,19 +25,6 @@ public class Validation {
     }
   }
 
-  //aLong = obj.getId()
-  public static <T> T checkUpdate(Long aLong, JpaRepository<T, Long> jpaRepository) {
-    return checkObjectExistsById(aLong, jpaRepository, new UpdateException("there are no such object"));
-  }
-
-  public static <T> T checkObjectExistsById(Long aLong, JpaRepository<T, Long> jpaRepository, RuntimeException e) {
-    checkId(aLong);
-    T t;
-    if ((t = jpaRepository.findOne(aLong)) == null) {
-      throw e;
-    }
-    return t;
-  }
 
   //use when object is parameter
   public static void checkSave(Object object) {
