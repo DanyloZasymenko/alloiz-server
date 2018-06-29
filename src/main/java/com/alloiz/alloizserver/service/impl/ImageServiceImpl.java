@@ -12,6 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
+
 @Service
 public class ImageServiceImpl implements ImageService {
 
@@ -26,6 +29,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image findOneAvailable(Long id) {
+        checkId(id);
         return imageRepository.findByAvailableAndId(true, id);
     }
 
@@ -36,6 +40,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image findOne(Long id) {
+        checkId(id);
         return imageRepository.findOne(id);
     }
 
@@ -46,11 +51,13 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image save(Image image) {
+        checkSave(image);
         return imageRepository.save(image.setAvailable(true));
     }
 
     @Override
     public Image save(MultipartFile multipartFile) {
+        checkSave(multipartFile);
         return imageRepository.save(new Image()
                 .setPath(fileBuilder.saveFile(multipartFile))
                 .setAvailable(true)
@@ -59,6 +66,8 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image save(MultipartFile multipartFile, Portfolio portfolio) {
+        checkSave(multipartFile);
+        checkSave(portfolio);
         return imageRepository.save(new Image()
                 .setPath(fileBuilder.saveFile(multipartFile))
                 .setAvailable(true)
@@ -68,6 +77,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image update(Image image) {
+        checkSave(image);
         return save(findOne(image.getId())
                 .setPath(image.getPath())
                 .setAvailable(image.getAvailable())
@@ -76,6 +86,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Boolean delete(Long id) {
+        checkId(id);
         if (id != null && id >= 0) {
             Image image = findOne(id);
             if (image != null) {
