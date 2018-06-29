@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-
+import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
+import static com.alloiz.alloizserver.service.utils.Validation.checkJson;
 import static com.alloiz.alloizserver.config.mapper.JsonMapper.json;
 
 @Service
@@ -23,6 +25,7 @@ public class TechnologyServiceImpl implements TechnologyService {
 
     @Override
     public Technology findOneAvailable(Long id) {
+        checkId(id);
         return technologyRepository.findByAvailableAndId(true, id);
     }
 
@@ -33,6 +36,7 @@ public class TechnologyServiceImpl implements TechnologyService {
 
     @Override
     public Technology findOne(Long id) {
+        checkId(id);
         return technologyRepository.findOne(id);
     }
 
@@ -43,11 +47,13 @@ public class TechnologyServiceImpl implements TechnologyService {
 
     @Override
     public Technology save(Technology technologies) {
+        checkSave(technologies);
         return technologyRepository.save(technologies.setAvailable(true));
     }
 
     @Override
     public Technology save(String technologyJson, MultipartFile multipartFile) {
+        checkJson(technologyJson);
         Technology technology = json(technologyJson, Technology.class);
         if(multipartFile != null)
             technology.setImage(fileBuilder.saveFile(multipartFile));
@@ -56,6 +62,7 @@ public class TechnologyServiceImpl implements TechnologyService {
 
     @Override
     public Technology update(Technology technologies) {
+        checkSave(technologies);
         return save(findOne(technologies.getId())
                     .setName(technologies.getName())
                     .setImage(technologies.getImage())
@@ -65,6 +72,7 @@ public class TechnologyServiceImpl implements TechnologyService {
 
     @Override
     public Technology updateImage(MultipartFile multipartFile, Long id) {
+        checkId(id);
         return findOne(id).setImage(fileBuilder.saveFile(multipartFile));
     }
 
