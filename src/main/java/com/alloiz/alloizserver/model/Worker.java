@@ -1,6 +1,9 @@
 package com.alloiz.alloizserver.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -8,6 +11,7 @@ import static java.util.stream.Collectors.toList;
 @Entity
 public class Worker extends GeneralName<Worker> {
 
+    @Column(unique = true)
     private String surname;
     private String image;
 
@@ -16,9 +20,6 @@ public class Worker extends GeneralName<Worker> {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    @JoinTable(name = "worker_specialization",
-            joinColumns = @JoinColumn(name = "worker_id"),
-            inverseJoinColumns = @JoinColumn(name = "incumbency_id"))
     private List<Incumbency> incumbencies;
 
     public Worker() {
