@@ -61,7 +61,7 @@ public class WorkerServiceImpl implements WorkerService {
         Worker worker = json(workerJson, Worker.class);
         if (multipartFile != null)
             worker.setImage(fileBuilder.saveFile(multipartFile));
-        return worker;
+        return save(worker);
     }
 
     @Override

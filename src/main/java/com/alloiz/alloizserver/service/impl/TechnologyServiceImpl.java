@@ -51,7 +51,7 @@ public class TechnologyServiceImpl implements TechnologyService {
         Technology technology = json(technologyJson, Technology.class);
         if(multipartFile != null)
             technology.setImage(fileBuilder.saveFile(multipartFile));
-        return technology;
+        return save(technology);
     }
 
     @Override
