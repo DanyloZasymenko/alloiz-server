@@ -2,23 +2,25 @@ package com.alloiz.alloizserver.dto;
 
 import com.alloiz.alloizserver.model.Incumbency;
 
+import java.util.List;
+
 public class WorkerFullDto extends WorkerShortDto<WorkerFullDto> {
 
-  private Incumbency incumbency;
+  private List<Incumbency> incumbencies;
 
-  public Incumbency getIncumbency() {
-    return incumbency;
+  public List<Incumbency> getIncumbencies() {
+    return incumbencies;
   }
 
-  public WorkerFullDto setIncumbency(Incumbency incumbency) {
-    this.incumbency = incumbency;
+  public WorkerFullDto setIncumbencies(List<Incumbency> incumbencies) {
+    this.incumbencies = incumbencies;
     return this;
   }
 
   @Override
   public String toString() {
     return "WorkerFullDto{" +
-        "incumbency=" + (incumbency  == null? "null": incumbency) +
+        "incumbency=" + (incumbencies  == null? "null": incumbencies) +
         ", id=" + id +
         ", name='" + name + '\'' +
         ", surname='" + surname + '\'' +
