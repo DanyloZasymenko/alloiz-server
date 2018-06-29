@@ -19,7 +19,7 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
-@EnableMapper(dto = "com.mplus.web1.dto.dto", model = "com.mplus.web1.persistence.models")
+@EnableMapper(dto = "com.alloiz.alloiz.dto", model = "com.alloiz.alloiz.model")
 public class DtoMapperImpl implements DtoMapper {
 
     private Class classFromReflection;
