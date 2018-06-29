@@ -1,8 +1,6 @@
 package com.alloiz.alloizserver.service.impl;
 
-import com.alloiz.alloizserver.dto.TechnologyDescriptionDto;
 import com.alloiz.alloizserver.model.Technology;
-import com.alloiz.alloizserver.model.TechnologyDescription;
 import com.alloiz.alloizserver.repository.TechnologyRepository;
 import com.alloiz.alloizserver.service.TechnologyService;
 import com.alloiz.alloizserver.service.utils.FileBuilder;
@@ -17,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.alloiz.alloizserver.config.mapper.JsonMapper.json;
-import static com.alloiz.alloizserver.dto.utils.builder.Builder.map;
 import static com.alloiz.alloizserver.service.utils.Validation.checkId;
 import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
 
@@ -75,7 +72,7 @@ public class TechnologyServiceImpl implements TechnologyService {
 
         technology.setDescriptions(technology.getDescriptions().stream()
                 .map(technologyDescription -> technologyDescription
-                        .setTechnology(technology)).collect(Collectors.toList()));
+                        .setTechnology(technology).setAvailable(true)).collect(Collectors.toList()));
 
         if (multipartFile != null)
             technology.setImage(fileBuilder.saveFile(multipartFile));
