@@ -3,12 +3,16 @@ package com.alloiz.alloizserver.service.impl;
 import com.alloiz.alloizserver.model.Callback;
 import com.alloiz.alloizserver.repository.CallbackRepository;
 import com.alloiz.alloizserver.service.CallbackService;
+import com.alloiz.alloizserver.service.utils.Validation;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
 
 @Service
 public class CallbackServiceImpl implements CallbackService {
@@ -18,6 +22,7 @@ public class CallbackServiceImpl implements CallbackService {
 
     @Override
     public Callback findOneAvailable(Long id) {
+        checkId(id);
         return callbackRepository.findByAvailableAndId(true, id);
     }
 
@@ -28,6 +33,7 @@ public class CallbackServiceImpl implements CallbackService {
 
     @Override
     public Callback findOne(Long id) {
+        checkId(id);
         return callbackRepository.findOne(id);
     }
 
@@ -38,6 +44,7 @@ public class CallbackServiceImpl implements CallbackService {
 
     @Override
     public Callback save(Callback callback) {
+        checkSave(callback);
        return callbackRepository.save(callback
                .setDatetime(Timestamp.valueOf(LocalDateTime.now()))
                .setAvailable(true));
@@ -45,6 +52,7 @@ public class CallbackServiceImpl implements CallbackService {
 
     @Override
     public Callback update(Callback callback) {
+        checkSave(callback);
         return save(findOne(callback.getId())
                     .setPhone(callback.getPhone())
                     .setAvailable(callback.getAvailable()));
@@ -52,6 +60,7 @@ public class CallbackServiceImpl implements CallbackService {
 
     @Override
     public Boolean delete(Long id) {
+        checkId(id);
         if(id != null && id >= 0){
             Callback callback = callbackRepository.findOne(id);
             if(callback != null){

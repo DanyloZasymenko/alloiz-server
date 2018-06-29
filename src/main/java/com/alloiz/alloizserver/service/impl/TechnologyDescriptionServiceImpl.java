@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
+
 @Service
 public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionService {
 
@@ -16,6 +19,7 @@ public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionSe
 
     @Override
     public TechnologyDescription findOneAvailable(Long id) {
+        checkId(id);
         return technologyDescriptionRepository.findByAvailableAndId(true, id);
     }
 
@@ -26,6 +30,7 @@ public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionSe
 
     @Override
     public TechnologyDescription findOne(Long id) {
+        checkId(id);
         return technologyDescriptionRepository.findOne(id);
     }
 
@@ -36,31 +41,31 @@ public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionSe
 
     @Override
     public TechnologyDescription save(TechnologyDescription technologyDescription) {
+        checkSave(technologyDescription);
         return technologyDescriptionRepository.save(technologyDescription.setAvailable(true));
     }
 
     @Override
     public TechnologyDescription update(TechnologyDescription technologyDescription) {
+        checkSave(technologyDescription);
         return save(findOne(technologyDescription.getId())
-                    .setDescription(technologyDescription.getDescription())
-                    .setTechnology(technologyDescription.getTechnology())
-                    .setLanguage(technologyDescription.getLanguage())
-                    .setAvailable(technologyDescription.getAvailable()));
+                .setDescription(technologyDescription.getDescription())
+                .setTechnology(technologyDescription.getTechnology())
+                .setLanguage(technologyDescription.getLanguage())
+                .setAvailable(technologyDescription.getAvailable()));
     }
 
     @Override
     public Boolean delete(Long id) {
-        if(id != null && id >= 0){
+        if (id != null && id >= 0) {
             TechnologyDescription technologyDescription = findOne(id);
-            if(technologyDescription != null){
+            if (technologyDescription != null) {
                 technologyDescriptionRepository.delete(technologyDescription);
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
-        }
-        else{
+        } else {
             throw new NullPointerException("Id is null or less than zero");
         }
     }

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 import static com.alloiz.alloizserver.config.mapper.JsonMapper.json;
+import static com.alloiz.alloizserver.service.utils.Validation.*;
 
 @Service
 public class WorkerServiceImpl implements WorkerService {
@@ -23,6 +24,7 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker findOneAvailable(Long id) {
+        checkId(id);
         return workerRepository.findByAvailableAndId(true, id);
     }
 
@@ -33,6 +35,7 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker findOne(Long id) {
+        checkId(id);
         return workerRepository.findOne(id);
     }
 
@@ -43,11 +46,13 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker save(Worker worker) {
+        checkSave(worker);
         return workerRepository.save(worker.setAvailable(true));
     }
 
     @Override
     public Worker update(Worker worker) {
+        checkSave(worker);
         return save(findOne(worker.getId())
                 .setName(worker.getName())
                 .setSurname(worker.getName())
@@ -58,6 +63,7 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker save(String workerJson, MultipartFile multipartFile) {
+        checkJson(workerJson);
         Worker worker = json(workerJson, Worker.class);
         if (multipartFile != null)
             worker.setImage(fileBuilder.saveFile(multipartFile));
@@ -66,6 +72,7 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker updateImage(MultipartFile multipartFile, Long id) {
+        checkId(id);
         return findOne(id)
                 .setImage(fileBuilder.saveFile(multipartFile));
     }

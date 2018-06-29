@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
+
 @Service
 public class CallbackTopicServiceImpl implements CallbackTopicService {
 
@@ -16,6 +19,7 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
 
     @Override
     public CallbackTopic findOneAvailable(Long id) {
+        checkId(id);
         return callbackTopicRepository.findByAvailableAndId(true, id);
     }
 
@@ -26,6 +30,7 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
 
     @Override
     public CallbackTopic findOne(Long id) {
+        checkId(id);
         return callbackTopicRepository.findOne(id);
     }
 
@@ -36,11 +41,13 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
 
     @Override
     public CallbackTopic save(CallbackTopic callbackTopic) {
+        checkSave(callbackTopic);
         return callbackTopicRepository.save(callbackTopic.setAvailable(true));
     }
 
     @Override
     public CallbackTopic update(CallbackTopic callbackTopic) {
+        checkSave(callbackTopic);
         return save(findOne(callbackTopic.getId())
                     .setName(callbackTopic.getName())
                     .setAvailable(callbackTopic.getAvailable()));
@@ -48,6 +55,7 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
 
     @Override
     public Boolean delete(Long id) {
+        checkId(id);
         if (id != null && id >= 0) {
             CallbackTopic callbackTopic = callbackTopicRepository.findOne(id);
             if (callbackTopic != null) {
