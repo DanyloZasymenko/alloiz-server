@@ -1,6 +1,7 @@
 package com.alloiz.alloizserver.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Portfolio extends GeneralName<Portfolio> {
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.REMOVE)
     private List<Image> images;
 
-    @OneToMany(mappedBy = "portfolio")
+    @OneToMany(mappedBy = "portfolio",cascade = CascadeType.ALL)
     private List<PortfolioDescription> descriptions;
 
     public String getLink() {

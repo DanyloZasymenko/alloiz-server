@@ -6,18 +6,21 @@ import com.alloiz.alloizserver.repository.PortfolioRepository;
 import com.alloiz.alloizserver.service.ImageService;
 import com.alloiz.alloizserver.service.PortfolioService;
 import com.alloiz.alloizserver.service.utils.FileBuilder;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.alloiz.alloizserver.config.mapper.JsonMapper.json;
 import static com.alloiz.alloizserver.service.utils.Validation.*;
 
 @Service
 public class PortfolioServiceImpl implements PortfolioService {
+    private static final Logger LOGGER = Logger.getLogger(PortfolioServiceImpl.class);
 
     @Autowired
     private PortfolioRepository portfolioRepository;
@@ -53,7 +56,15 @@ public class PortfolioServiceImpl implements PortfolioService {
     @Override
     public Portfolio save(String portfolioJson, MultipartFile[] multipartFiles) {
         checkJson(portfolioJson);
-        Portfolio portfolio = save(json(portfolioJson, Portfolio.class));
+        Portfolio portfolio = json(portfolioJson, Portfolio.class);
+
+        portfolio.setDescriptions(portfolio.getDescriptions().stream()
+                .map(technologyDescription -> technologyDescription
+                        .setPortfolio(portfolio).setAvailable(true)).collect(Collectors.toList()));
+
+        portfolio.setDescriptions(portfolio.getDescriptions().stream()
+                .map(portfolioDescription -> portfolioDescription
+                        .setPortfolio(portfolio).setAvailable(true)).collect(Collectors.toList()));
         List<Image> images = new ArrayList<>();
         for (MultipartFile file : multipartFiles) {
             images.add(imageService.save(file, portfolio));
