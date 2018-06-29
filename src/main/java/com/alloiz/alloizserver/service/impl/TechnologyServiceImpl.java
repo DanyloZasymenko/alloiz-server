@@ -4,10 +4,13 @@ import com.alloiz.alloizserver.model.Technology;
 import com.alloiz.alloizserver.repository.TechnologyRepository;
 import com.alloiz.alloizserver.service.TechnologyService;
 import com.alloiz.alloizserver.service.utils.FileBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 import static com.alloiz.alloizserver.config.mapper.JsonMapper.json;
@@ -15,11 +18,19 @@ import static com.alloiz.alloizserver.config.mapper.JsonMapper.json;
 @Service
 public class TechnologyServiceImpl implements TechnologyService {
 
+    private static final Logger LOGGER = Logger.getLogger(TechnologyServiceImpl.class);
     @Autowired
     private TechnologyRepository technologyRepository;
-
     @Autowired
     private FileBuilder fileBuilder;
+
+    public static void checkJson(String json) {
+        try {
+            new ObjectMapper().readTree(String.valueOf(json));
+        } catch (NullPointerException | IOException e) {
+            throw new RuntimeException("json is null or empty");
+        }
+    }
 
     @Override
     public Technology findOneAvailable(Long id) {
@@ -48,8 +59,13 @@ public class TechnologyServiceImpl implements TechnologyService {
 
     @Override
     public Technology save(String technologyJson, MultipartFile multipartFile) {
+        checkJson(technologyJson);
         Technology technology = json(technologyJson, Technology.class);
-        if(multipartFile != null)
+        LOGGER.info(technology);
+        LOGGER.info(technology);
+        LOGGER.info(technology);
+        LOGGER.info(technology);
+        if (multipartFile != null)
             technology.setImage(fileBuilder.saveFile(multipartFile));
         return save(technology);
     }
@@ -57,10 +73,10 @@ public class TechnologyServiceImpl implements TechnologyService {
     @Override
     public Technology update(Technology technologies) {
         return save(findOne(technologies.getId())
-                    .setName(technologies.getName())
-                    .setImage(technologies.getImage())
-                    .setDescriptions(technologies.getDescriptions())
-                    .setAvailable(technologies.getAvailable()));
+                .setName(technologies.getName())
+                .setImage(technologies.getImage())
+                .setDescriptions(technologies.getDescriptions())
+                .setAvailable(technologies.getAvailable()));
     }
 
     @Override
@@ -70,18 +86,16 @@ public class TechnologyServiceImpl implements TechnologyService {
 
     @Override
     public Boolean delete(Long id) {
-       if(id != null && id >= 0){
-           Technology technologies = technologyRepository.findOne(id);
-           if(technologies != null){
-               technologyRepository.delete(technologies);
+        if (id != null && id >= 0) {
+            Technology technologies = technologyRepository.findOne(id);
+            if (technologies != null) {
+                technologyRepository.delete(technologies);
                 return true;
-           }
-           else {
-               return false;
-           }
-       }
-       else{
+            } else {
+                return false;
+            }
+        } else {
             throw new NullPointerException("Id is null or less than zero");
-       }
+        }
     }
 }

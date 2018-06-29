@@ -3,6 +3,7 @@ package com.alloiz.alloizserver.controller;
 import com.alloiz.alloizserver.dto.TechnologyDto;
 import com.alloiz.alloizserver.model.Technology;
 import com.alloiz.alloizserver.service.TechnologyService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,9 @@ import static com.alloiz.alloizserver.dto.utils.builder.Builder.map;
 @RestController
 @RequestMapping("/technology")
 public class TechnologyController {
+
+    private static final Logger LOGGER = Logger.getLogger(TechnologyController.class);
+
 
     @Autowired
     private TechnologyService technologyService;
@@ -48,7 +52,8 @@ public class TechnologyController {
     @PostMapping("/save")
     private ResponseEntity<TechnologyDto> save(@RequestParam String technologyJson,
                                                @RequestParam(required = false) MultipartFile multipartFile) {
-        return ResponseEntity.ok(map(technologyService.save(technologyJson, multipartFile), TechnologyDto.class));
+        return ResponseEntity.ok(
+                map(technologyService.save(technologyJson, multipartFile), TechnologyDto.class));
     }
 
     @PostMapping("/update")

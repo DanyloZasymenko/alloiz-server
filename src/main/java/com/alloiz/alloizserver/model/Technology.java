@@ -1,6 +1,7 @@
 package com.alloiz.alloizserver.model;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -12,11 +13,13 @@ public class Technology extends GeneralName<Technology> {
 
     private String image;
 
-    @OneToMany(mappedBy = "technology")
+    @OneToMany(mappedBy = "technology",cascade = CascadeType.ALL)
     private List<TechnologyDescription> descriptions;
 
     public Technology() {
     }
+
+
 
     public String getImage() {
         return image;

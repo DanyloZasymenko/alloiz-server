@@ -2,6 +2,7 @@ package com.alloiz.alloizserver.model;
 
 import com.alloiz.alloizserver.model.enums.Language;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -9,12 +10,12 @@ import javax.persistence.ManyToOne;
 @Entity
 public class TechnologyDescription extends General<TechnologyDescription> {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Technology technology;
     private Language language;
-
     @Column(columnDefinition = "LONGTEXT")
     private String description;
+
 
     public Technology getTechnology() {
         return technology;
