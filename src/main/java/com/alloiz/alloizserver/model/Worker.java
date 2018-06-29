@@ -3,9 +3,7 @@ package com.alloiz.alloizserver.model;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class Worker extends GeneralName<Worker> {
@@ -14,6 +12,9 @@ public class Worker extends GeneralName<Worker> {
   private String image;
 
   @ManyToMany(cascade = CascadeType.REFRESH)
+  @JoinTable(name = "worker_specialization",
+          joinColumns = @JoinColumn(name = "worker_id"),
+          inverseJoinColumns = @JoinColumn(name = "incumbency_id"))
   private List<Incumbency> incumbencies;
 
   public Worker() {
