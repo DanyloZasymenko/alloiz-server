@@ -3,6 +3,8 @@ package com.alloiz.alloizserver.controller;
 import com.alloiz.alloizserver.dto.PortfolioDto;
 import com.alloiz.alloizserver.model.Portfolio;
 import com.alloiz.alloizserver.service.PortfolioService;
+import com.alloiz.alloizserver.service.impl.PortfolioServiceImpl;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,8 @@ import static com.alloiz.alloizserver.dto.utils.builder.Builder.map;
 @RestController
 @RequestMapping("/portfolio")
 public class PortfolioController {
+    private static final Logger LOGGER = Logger.getLogger(PortfolioController.class);
+
 
     @Autowired
     private PortfolioService portfolioService;
@@ -45,6 +49,12 @@ public class PortfolioController {
 
     @PostMapping("/save")
     private ResponseEntity<PortfolioDto> save(@RequestParam String portfolioJson, @RequestParam(required = false) MultipartFile [] multipartFiles) {
+       LOGGER.info(portfolioJson);
+       LOGGER.info(portfolioJson);
+       LOGGER.info(portfolioJson);
+       LOGGER.info(portfolioJson);
+       LOGGER.info(portfolioJson);
+       LOGGER.info(portfolioJson);
         return ResponseEntity.ok(map(portfolioService.save(portfolioJson, multipartFiles), PortfolioDto.class));
     }
 
