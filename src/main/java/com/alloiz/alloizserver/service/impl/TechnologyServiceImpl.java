@@ -12,10 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.alloiz.alloizserver.config.mapper.JsonMapper.json;
+import static com.alloiz.alloizserver.dto.utils.builder.Builder.map;
 import static com.alloiz.alloizserver.service.utils.Validation.checkId;
 import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
-import static com.alloiz.alloizserver.service.utils.Validation.checkJson;
-import static com.alloiz.alloizserver.config.mapper.JsonMapper.json;
 
 @Service
 public class TechnologyServiceImpl implements TechnologyService {
@@ -25,6 +27,8 @@ public class TechnologyServiceImpl implements TechnologyService {
     private TechnologyRepository technologyRepository;
     @Autowired
     private FileBuilder fileBuilder;
+    @Autowired
+    private TechnologyDescriptionServiceImpl technologyDescriptionService;
 
     public static void checkJson(String json) {
         try {
@@ -66,10 +70,11 @@ public class TechnologyServiceImpl implements TechnologyService {
     public Technology save(String technologyJson, MultipartFile multipartFile) {
         checkJson(technologyJson);
         Technology technology = json(technologyJson, Technology.class);
-        LOGGER.info(technology);
-        LOGGER.info(technology);
-        LOGGER.info(technology);
-        LOGGER.info(technology);
+
+        technology.setDescriptions(technology.getDescriptions().stream()
+                .map(technologyDescription -> technologyDescription
+                        .setTechnology(map(technology))).collect(Collectors.toList()));
+
         if (multipartFile != null)
             technology.setImage(fileBuilder.saveFile(multipartFile));
         return save(technology);
