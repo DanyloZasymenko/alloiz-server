@@ -75,6 +75,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public Portfolio save(Portfolio portfolio) {
+        checkSave(portfolio);
         return portfolioRepository.save(portfolio.setAvailable(true));
     }
 
