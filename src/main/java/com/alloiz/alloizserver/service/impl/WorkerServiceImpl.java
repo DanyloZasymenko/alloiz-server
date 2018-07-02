@@ -78,7 +78,7 @@ public class WorkerServiceImpl implements WorkerService {
         if (multipartFile != null)
             worker.setImage(fileBuilder.saveFile(multipartFile));
         return save(worker.setName(worker.getName())
-                .setSurname(worker.getName())
+                .setSurname(worker.getSurname())
                 .setAvailable(worker.getAvailable())
                 .setIncumbencies(worker.getIncumbencies()));
     }
