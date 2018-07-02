@@ -4,6 +4,7 @@ import com.alloiz.alloizserver.model.Worker;
 import com.alloiz.alloizserver.repository.WorkerRepository;
 import com.alloiz.alloizserver.service.WorkerService;
 import com.alloiz.alloizserver.service.utils.FileBuilder;
+import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,6 +60,16 @@ public class WorkerServiceImpl implements WorkerService {
                 .setImage(worker.getImage())
                 .setAvailable(worker.getAvailable())
                 .setIncumbencies(worker.getIncumbencies()));
+    }
+
+    @Override
+    public Worker update(String workerJson, MultipartFile multipartFile) {
+        checkJson(workerJson);
+        Worker worker = json(workerJson, Worker.class);
+        if (multipartFile != null)
+            worker.setImage(fileBuilder.saveFile(multipartFile));
+        return save(worker);
+
     }
 
     @Override

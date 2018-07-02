@@ -55,10 +55,17 @@ public class WorkerController {
         return ResponseEntity.ok(map(workerService.save(workerJson, multipartFile), WorkerFullDto.class));
     }
 
+//    @PostMapping("/update")
+//    private ResponseEntity<WorkerFullDto> update(@RequestParam WorkerFullDto worker) {
+//        return ResponseEntity.ok(map(workerService.update(map(worker, Worker.class)), WorkerFullDto.class));
+//    }
+
     @PostMapping("/update")
-    private ResponseEntity<WorkerFullDto> update(@RequestParam WorkerFullDto worker) {
-        return ResponseEntity.ok(map(workerService.update(map(worker, Worker.class)), WorkerFullDto.class));
+    private ResponseEntity<WorkerFullDto> update(@RequestParam String workerJson, @RequestParam(required = false) MultipartFile multipartFile) {
+        LOGGER.info(workerJson);
+        return ResponseEntity.ok(map(workerService.update(workerJson, multipartFile), WorkerFullDto.class));
     }
+
 
     @PostMapping("/update-image/{id}")
     private ResponseEntity<WorkerFullDto> updateImage(@RequestParam MultipartFile multipartFile, @PathVariable Long id) {
