@@ -22,7 +22,7 @@ public interface PortfolioService {
 
     Boolean deleteById(Long id);
 
-    Portfolio update(String portfolioJson);
+    Portfolio update(Portfolio portfolio);
 
     Portfolio updateImage(MultipartFile multipartFile, Long id);
 

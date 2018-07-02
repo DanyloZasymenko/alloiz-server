@@ -20,8 +20,6 @@ public class Technology extends GeneralName<Technology> {
     public Technology() {
     }
 
-
-
     public String getImage() {
         return image;
     }

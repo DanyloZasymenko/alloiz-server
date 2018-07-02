@@ -4,6 +4,7 @@ import com.alloiz.alloizserver.model.Image;
 import com.alloiz.alloizserver.model.Portfolio;
 import com.alloiz.alloizserver.repository.PortfolioRepository;
 import com.alloiz.alloizserver.service.ImageService;
+import com.alloiz.alloizserver.service.PortfolioDescriptionService;
 import com.alloiz.alloizserver.service.PortfolioService;
 import com.alloiz.alloizserver.service.utils.FileBuilder;
 import org.apache.log4j.Logger;
@@ -21,6 +22,7 @@ import static com.alloiz.alloizserver.service.utils.Validation.*;
 
 @Service
 public class PortfolioServiceImpl implements PortfolioService {
+
     private static final Logger LOGGER = Logger.getLogger(PortfolioServiceImpl.class);
 
     @Autowired
@@ -31,6 +33,9 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    private PortfolioDescriptionService portfolioDescriptionService;
 
     @Override
     public Portfolio findOneAvailable(Long id) {
@@ -75,18 +80,20 @@ public class PortfolioServiceImpl implements PortfolioService {
     }
 
     @Override
-    public Portfolio update(String portfolioJson) {
-        checkJson(portfolioJson);
-        Portfolio portfolio = json(portfolioJson, Portfolio.class);
-        checkObjectExistsById(portfolio.getId(), portfolioRepository);
-        portfolio = save(findOne(portfolio.getId())
-                .setName(portfolio.getName())
-                .setAvailable(portfolio.getAvailable())
-                .setDescriptions(portfolio.getDescriptions())
-                .setLink(portfolio.getLink())
-                .setImages(portfolio.getImages()));
-        imageService.deleteAllByPortfolioNull();
-        return portfolio;
+    public Portfolio update(Portfolio portfolio) {
+        try {
+            LOGGER.info(portfolio);
+            checkObjectExistsById(portfolio.getId(), portfolioRepository);
+            return save(findOne(portfolio.getId())
+                    .setName(portfolio.getName())
+                    .setAvailable(portfolio.getAvailable())
+                    .setDescriptions(portfolio.getDescriptions().stream()
+                            .map(portfolioDescription -> portfolioDescriptionService.update(portfolioDescription
+                                    .setPortfolio(portfolio).setAvailable(true))).collect(Collectors.toList()))
+                    .setLink(portfolio.getLink()));
+        } finally {
+            imageService.deleteAllByPortfolioNull();
+        }
     }
 
     @Override

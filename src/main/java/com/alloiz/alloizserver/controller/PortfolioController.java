@@ -3,10 +3,8 @@ package com.alloiz.alloizserver.controller;
 import com.alloiz.alloizserver.dto.PortfolioDto;
 import com.alloiz.alloizserver.model.Portfolio;
 import com.alloiz.alloizserver.service.PortfolioService;
-import com.alloiz.alloizserver.service.impl.PortfolioServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,8 +17,8 @@ import static com.alloiz.alloizserver.dto.utils.builder.Builder.map;
 @RestController
 @RequestMapping("/portfolio")
 public class PortfolioController {
-    private static final Logger LOGGER = Logger.getLogger(PortfolioController.class);
 
+    private static final Logger LOGGER = Logger.getLogger(PortfolioController.class);
 
     @Autowired
     private PortfolioService portfolioService;
@@ -49,13 +47,13 @@ public class PortfolioController {
 
     @PostMapping("/save")
     private ResponseEntity<PortfolioDto> save(@RequestParam String portfolioJson,
-                                              @RequestParam(required = false) MultipartFile [] multipartFiles) {
+                                              @RequestParam(required = false) MultipartFile[] multipartFiles) {
         return ResponseEntity.ok(map(portfolioService.save(portfolioJson, multipartFiles), PortfolioDto.class));
     }
 
     @PostMapping("/update")
-    private ResponseEntity<PortfolioDto> update(@RequestParam String portfolioJson) {
-        return ResponseEntity.ok(map(portfolioService.update(portfolioJson), PortfolioDto.class));
+    private ResponseEntity<PortfolioDto> update(@RequestBody PortfolioDto portfolio) {
+        return ResponseEntity.ok(map(portfolioService.update(map(portfolio, Portfolio.class)), PortfolioDto.class));
     }
 
     @PostMapping("/update-image/{id}")
