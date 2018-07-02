@@ -63,7 +63,7 @@ public class PortfolioServiceImpl implements PortfolioService {
                         .setPortfolio(portfolio).setAvailable(true)).collect(Collectors.toList()));
         List<Image> images = new ArrayList<>();
         for (MultipartFile file : multipartFiles) {
-            images.add(imageService.save(file, portfolio));
+            images.add(imageService.save(file, portfolio.getId()));
         }
         return save(portfolio.setImages(images));
     }
@@ -75,15 +75,18 @@ public class PortfolioServiceImpl implements PortfolioService {
     }
 
     @Override
-    public Portfolio update(Portfolio portfolio) {
+    public Portfolio update(String portfolioJson) {
+        checkJson(portfolioJson);
+        Portfolio portfolio = json(portfolioJson, Portfolio.class);
         checkObjectExistsById(portfolio.getId(), portfolioRepository);
-        return save(findOne(portfolio.getId())
+        portfolio = save(findOne(portfolio.getId())
                 .setName(portfolio.getName())
                 .setAvailable(portfolio.getAvailable())
                 .setDescriptions(portfolio.getDescriptions())
                 .setLink(portfolio.getLink())
                 .setImages(portfolio.getImages()));
-
+        imageService.deleteAllByPortfolioNull();
+        return portfolio;
     }
 
     @Override
@@ -91,7 +94,7 @@ public class PortfolioServiceImpl implements PortfolioService {
         checkId(id);
         Portfolio portfolio = findOne(id);
         for (MultipartFile file : multipartFile) {
-            imageService.save(file, portfolio);
+            imageService.save(file, portfolio.getId());
         }
         return portfolio;
     }

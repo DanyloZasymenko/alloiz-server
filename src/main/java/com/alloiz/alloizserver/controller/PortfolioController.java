@@ -54,8 +54,8 @@ public class PortfolioController {
     }
 
     @PostMapping("/update")
-    private ResponseEntity<PortfolioDto> update(@RequestBody PortfolioDto portfolio) {
-        return ResponseEntity.ok(map(portfolioService.update(map(portfolio, Portfolio.class)), PortfolioDto.class));
+    private ResponseEntity<PortfolioDto> update(@RequestParam String portfolioJson) {
+        return ResponseEntity.ok(map(portfolioService.update(portfolioJson), PortfolioDto.class));
     }
 
     @PostMapping("/update-image/{id}")
