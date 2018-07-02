@@ -1,6 +1,7 @@
 package com.alloiz.alloizserver.controller;
 
 import com.alloiz.alloizserver.dto.TechnologyDto;
+import com.alloiz.alloizserver.dto.WorkerFullDto;
 import com.alloiz.alloizserver.model.Technology;
 import com.alloiz.alloizserver.service.TechnologyService;
 import org.apache.log4j.Logger;
@@ -56,9 +57,18 @@ public class TechnologyController {
                 map(technologyService.save(technologyJson, multipartFile), TechnologyDto.class));
     }
 
+//    @PostMapping("/update")
+//    private ResponseEntity<TechnologyDto> update(@RequestBody TechnologyDto technology) {
+//        return ResponseEntity.ok(map(technologyService.update(map(technology, Technology.class)), TechnologyDto.class));
+//    }
+
     @PostMapping("/update")
-    private ResponseEntity<TechnologyDto> update(@RequestBody TechnologyDto technology) {
-        return ResponseEntity.ok(map(technologyService.update(map(technology, Technology.class)), TechnologyDto.class));
+    private ResponseEntity<TechnologyDto> update(@RequestParam String technologyJson, @RequestParam(required = false) MultipartFile multipartFile) {
+        LOGGER.info(technologyJson);
+        if (multipartFile != null)
+            return ResponseEntity.ok(map(technologyService.update(technologyJson, multipartFile), TechnologyDto.class));
+        else
+            return ResponseEntity.ok(map(technologyService.update(technologyJson), TechnologyDto.class));
     }
 
     @PostMapping("/update-image/{id}")

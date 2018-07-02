@@ -21,6 +21,10 @@ public interface TechnologyService {
 
     Technology update(Technology technologies);
 
+    Technology update(String technologyJson, MultipartFile multipartFile);
+
+    Technology update(String technologyJson);
+
     Technology updateImage(MultipartFile multipartFile, Long id);
 
     Boolean delete(Long id);
