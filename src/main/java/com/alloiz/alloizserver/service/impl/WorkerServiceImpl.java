@@ -55,6 +55,7 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public Worker save(Worker worker) {
         checkSave(worker);
+
         return workerRepository.save(worker.setAvailable(true));
     }
 
