@@ -48,7 +48,8 @@ public class PortfolioController {
     }
 
     @PostMapping("/save")
-    private ResponseEntity<PortfolioDto> save(@RequestParam String portfolioJson, @RequestParam(required = false) MultipartFile [] multipartFiles) {
+    private ResponseEntity<PortfolioDto> save(@RequestParam String portfolioJson,
+                                              @RequestParam(required = false) MultipartFile [] multipartFiles) {
         return ResponseEntity.ok(map(portfolioService.save(portfolioJson, multipartFiles), PortfolioDto.class));
     }
 
