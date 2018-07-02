@@ -1,16 +1,14 @@
 package com.alloiz.alloizserver.controller;
 
-import static com.alloiz.alloizserver.dto.utils.builder.Builder.map;
-
 import com.alloiz.alloizserver.model.OrderType;
 import com.alloiz.alloizserver.service.OrderTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import org.springframework.web.multipart.MultipartFile;
+
+import static com.alloiz.alloizserver.dto.utils.builder.Builder.map;
 
 @RestController
 @RequestMapping("/order-type")

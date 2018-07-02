@@ -57,7 +57,7 @@ public class PortfolioServiceImpl implements PortfolioService {
     @Override
     public Portfolio save(String portfolioJson, MultipartFile[] multipartFiles) {
         checkJson(portfolioJson);
-        Portfolio portfolio = json(portfolioJson, Portfolio.class);
+        Portfolio portfolio = save(json(portfolioJson, Portfolio.class));
         portfolio.setDescriptions(portfolio.getDescriptions().stream()
                 .map(portfolioDescription -> portfolioDescription
                         .setPortfolio(portfolio).setAvailable(true)).collect(Collectors.toList()));
