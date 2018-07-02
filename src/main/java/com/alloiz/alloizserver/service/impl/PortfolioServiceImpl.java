@@ -58,11 +58,6 @@ public class PortfolioServiceImpl implements PortfolioService {
     public Portfolio save(String portfolioJson, MultipartFile[] multipartFiles) {
         checkJson(portfolioJson);
         Portfolio portfolio = json(portfolioJson, Portfolio.class);
-
-        portfolio.setDescriptions(portfolio.getDescriptions().stream()
-                .map(technologyDescription -> technologyDescription
-                        .setPortfolio(portfolio).setAvailable(true)).collect(Collectors.toList()));
-
         portfolio.setDescriptions(portfolio.getDescriptions().stream()
                 .map(portfolioDescription -> portfolioDescription
                         .setPortfolio(portfolio).setAvailable(true)).collect(Collectors.toList()));
