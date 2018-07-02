@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import static com.alloiz.alloizserver.config.mapper.JsonMapper.json;
 import static com.alloiz.alloizserver.service.utils.Validation.checkId;
 import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
+import static com.alloiz.alloizserver.service.utils.Validation.checkObjectExistsById;
 
 @Service
 public class TechnologyServiceImpl implements TechnologyService {
@@ -81,7 +82,7 @@ public class TechnologyServiceImpl implements TechnologyService {
 
     @Override
     public Technology update(Technology technologies) {
-        checkSave(technologies);
+        checkObjectExistsById(technologies.getId(),technologyRepository);
         return save(findOne(technologies.getId())
                 .setName(technologies.getName())
                 .setImage(technologies.getImage())

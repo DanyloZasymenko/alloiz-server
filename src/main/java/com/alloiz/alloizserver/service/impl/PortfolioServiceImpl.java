@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import static com.alloiz.alloizserver.config.mapper.JsonMapper.json;
 import static com.alloiz.alloizserver.service.utils.Validation.*;
 
+
 @Service
 public class PortfolioServiceImpl implements PortfolioService {
     private static final Logger LOGGER = Logger.getLogger(PortfolioServiceImpl.class);
@@ -74,13 +75,13 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public Portfolio save(Portfolio portfolio) {
-        checkSave(portfolio);
+        checkObjectExistsById(portfolio.getId(),portfolioRepository);
         return portfolioRepository.save(portfolio.setAvailable(true));
     }
 
     @Override
     public Portfolio update(Portfolio portfolio) {
-        checkSave(portfolio);
+
         return save(findOne(portfolio.getId())
                 .setName(portfolio.getName())
                 .setAvailable(portfolio.getAvailable())

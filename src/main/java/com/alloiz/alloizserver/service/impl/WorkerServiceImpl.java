@@ -53,7 +53,7 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker update(Worker worker) {
-        checkSave(worker);
+        checkObjectExistsById(worker.getId(),workerRepository);
         return save(findOne(worker.getId())
                 .setName(worker.getName())
                 .setSurname(worker.getName())
@@ -66,6 +66,7 @@ public class WorkerServiceImpl implements WorkerService {
     public Worker update(String workerJson, MultipartFile multipartFile) {
         checkJson(workerJson);
         Worker worker = json(workerJson, Worker.class);
+        checkObjectExistsById(worker.getId(),workerRepository);
         if (multipartFile != null)
             worker.setImage(fileBuilder.saveFile(multipartFile));
         return save(worker);

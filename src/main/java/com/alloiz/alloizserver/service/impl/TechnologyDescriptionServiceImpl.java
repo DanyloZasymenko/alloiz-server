@@ -10,6 +10,7 @@ import java.util.List;
 
 import static com.alloiz.alloizserver.service.utils.Validation.checkId;
 import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
+import static com.alloiz.alloizserver.service.utils.Validation.checkObjectExistsById;
 
 @Service
 public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionService {
@@ -47,7 +48,7 @@ public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionSe
 
     @Override
     public TechnologyDescription update(TechnologyDescription technologyDescription) {
-        checkSave(technologyDescription);
+        checkObjectExistsById(technologyDescription.getId(),technologyDescriptionRepository);
         return save(findOne(technologyDescription.getId())
                 .setDescription(technologyDescription.getDescription())
                 .setTechnology(technologyDescription.getTechnology())

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import static com.alloiz.alloizserver.service.utils.Validation.checkId;
 import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
+import static com.alloiz.alloizserver.service.utils.Validation.checkObjectExistsById;
 
 @Service
 public class PortfolioDescriptionServiceImpl implements PortfolioDescriptionService {
@@ -46,7 +47,7 @@ public class PortfolioDescriptionServiceImpl implements PortfolioDescriptionServ
 
   @Override
   public PortfolioDescription update(PortfolioDescription portfolioDescription) {
-    checkSave(portfolioDescription);
+    checkObjectExistsById(portfolioDescription.getId(),portfolioDescriptionRepository);
     return save(findOne(portfolioDescription.getId())
         .setDescription(portfolioDescription.getDescription())
         .setLanguage(portfolioDescription.getLanguage())
