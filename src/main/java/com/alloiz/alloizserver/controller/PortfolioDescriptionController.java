@@ -51,7 +51,7 @@ public class PortfolioDescriptionController {
 
     @DeleteMapping("/delete/{id}")
     private ResponseEntity delete(@PathVariable Long id) {
-        return new ResponseEntity(map(portfolioDescriptionService.delete(id) ? HttpStatus.OK : HttpStatus.CONFLICT));
+        return ResponseEntity.ok(portfolioDescriptionService.delete(id));
     }
 
     @PostMapping("/update")
