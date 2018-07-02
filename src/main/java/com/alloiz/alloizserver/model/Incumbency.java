@@ -5,27 +5,28 @@ import javax.persistence.Entity;
 @Entity
 public class Incumbency extends GeneralName<Incumbency> {
 
-  private Boolean isOpen;
 
-  public Incumbency() {
-  }
+    private Boolean isOpen;
 
-  public Boolean getOpen() {
-    return isOpen;
-  }
+    public Incumbency() {
+    }
 
-  public Incumbency setOpen(Boolean open) {
-    isOpen = open;
-    return this;
-  }
+    public Boolean getOpen() {
+        return isOpen;
+    }
 
-  @Override
-  public String toString() {
-    return "Incumbency{" +
-        "isOpen=" + isOpen +
-        ", id=" + id +
-        ", name='" + name + '\'' +
-        ", available=" + available +
-        "} " + super.toString();
-  }
+    public Incumbency setOpen(Boolean open) {
+        isOpen = open;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Incumbency{" +
+                "isOpen=" + isOpen +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", available=" + available +
+                "} " + super.toString();
+    }
 }

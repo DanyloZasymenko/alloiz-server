@@ -4,6 +4,7 @@ import com.alloiz.alloizserver.dto.WorkerFullDto;
 import com.alloiz.alloizserver.dto.WorkerShortDto;
 import com.alloiz.alloizserver.model.Worker;
 import com.alloiz.alloizserver.service.WorkerService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import static com.alloiz.alloizserver.dto.utils.builder.Builder.map;
 @RestController
 @RequestMapping("/worker")
 public class WorkerController {
+
+    private static final Logger LOGGER = Logger.getLogger(WorkerController.class);
 
     @Autowired
     private WorkerService workerService;
@@ -48,6 +51,7 @@ public class WorkerController {
 
     @PostMapping("/save")
     private ResponseEntity<WorkerFullDto> save(@RequestParam String workerJson, @RequestParam(required = false) MultipartFile multipartFile) {
+       LOGGER.info(workerJson);
         return ResponseEntity.ok(map(workerService.save(workerJson, multipartFile), WorkerFullDto.class));
     }
 

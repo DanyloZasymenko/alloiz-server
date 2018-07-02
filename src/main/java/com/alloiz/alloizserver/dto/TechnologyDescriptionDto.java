@@ -7,19 +7,21 @@ import com.alloiz.alloizserver.model.enums.Language;
 @Dto
 public class TechnologyDescriptionDto {
 
-  private Technology technology;
-  private Language language;
   protected Long id;
+  protected Language language;
   protected Boolean available;
+  protected String description;
 
-  public Technology getTechnology() {
-    return technology;
+
+  public String getDescription() {
+    return description;
   }
 
-  public TechnologyDescriptionDto setTechnology(Technology technology) {
-    this.technology = technology;
+  public TechnologyDescriptionDto setDescription(String description) {
+    this.description = description;
     return this;
   }
+
 
   public Language getLanguage() {
     return language;
@@ -51,10 +53,10 @@ public class TechnologyDescriptionDto {
   @Override
   public String toString() {
     return "TechnologyDescriptionDto{" +
-        "technology=" + technology +
-        ", language=" + language +
-        ", id=" + id +
-        ", available=" + available +
-        '}';
+            "id=" + id +
+            ", language=" + language +
+            ", available=" + available +
+            ", description='" + description + '\'' +
+            '}';
   }
 }

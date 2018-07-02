@@ -6,7 +6,8 @@ import com.alloiz.alloizserver.service.IncumbencyService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
 @Service
 public class IncumbencyServiceImpl implements IncumbencyService {
 
@@ -15,6 +16,7 @@ public class IncumbencyServiceImpl implements IncumbencyService {
 
   @Override
   public Incumbency findOneAvailable(Long id) {
+    checkId(id);
     return incumbencyRepository.findByAvailableAndId(true, id);
   }
 
@@ -25,6 +27,7 @@ public class IncumbencyServiceImpl implements IncumbencyService {
 
   @Override
   public Incumbency findOne(Long id) {
+    checkId(id);
     return incumbencyRepository.findOne(id);
   }
 
@@ -35,11 +38,13 @@ public class IncumbencyServiceImpl implements IncumbencyService {
 
   @Override
   public Incumbency save(Incumbency incumbency) {
+    checkSave(incumbency);
     return incumbencyRepository.save(incumbency.setAvailable(true));
   }
 
   @Override
   public Incumbency update(Incumbency incumbency) {
+    checkSave(incumbency);
     return save(findOne(incumbency.getId())
         .setAvailable(incumbency.getAvailable())
         .setName(incumbency.getName())
@@ -48,6 +53,7 @@ public class IncumbencyServiceImpl implements IncumbencyService {
 
   @Override
   public Boolean delete(Long id) {
+    checkId(id);
     if (id != null && id >= 0) {
       Incumbency incumbency = incumbencyRepository.findOne(id);
       if (incumbency != null) {

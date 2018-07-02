@@ -7,6 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
+
 @Service
 public class PortfolioDescriptionServiceImpl implements PortfolioDescriptionService {
 
@@ -15,6 +18,7 @@ public class PortfolioDescriptionServiceImpl implements PortfolioDescriptionServ
 
   @Override
   public PortfolioDescription findOneAvailable(Long id) {
+    checkId(id);
     return portfolioDescriptionRepository.findByAvailableAndId(true, id);
   }
 
@@ -25,6 +29,7 @@ public class PortfolioDescriptionServiceImpl implements PortfolioDescriptionServ
 
   @Override
   public PortfolioDescription findOne(Long id) {
+    checkId(id);
     return portfolioDescriptionRepository.findOne(id);
   }
 
@@ -35,11 +40,13 @@ public class PortfolioDescriptionServiceImpl implements PortfolioDescriptionServ
 
   @Override
   public PortfolioDescription save(PortfolioDescription portfolio) {
+    checkSave(portfolio);
     return portfolioDescriptionRepository.save(portfolio.setAvailable(true));
   }
 
   @Override
   public PortfolioDescription update(PortfolioDescription portfolioDescription) {
+    checkSave(portfolioDescription);
     return save(findOne(portfolioDescription.getId())
         .setDescription(portfolioDescription.getDescription())
         .setLanguage(portfolioDescription.getLanguage())

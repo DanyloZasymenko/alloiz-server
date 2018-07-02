@@ -6,7 +6,8 @@ import com.alloiz.alloizserver.service.OrderTypeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
 @Service
 public class OrderTypeServiceImpl implements OrderTypeService {
 
@@ -15,6 +16,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
 
   @Override
   public OrderType findOneAvailable(Long id) {
+    checkId(id);
     return orderTypeRepository.findByAvailableAndId(true,id);
   }
 
@@ -25,6 +27,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
 
   @Override
   public OrderType findOne(Long id) {
+    checkId(id);
     return orderTypeRepository.findOne(id);
   }
 
@@ -35,11 +38,13 @@ public class OrderTypeServiceImpl implements OrderTypeService {
 
   @Override
   public OrderType save(OrderType orderType) {
+    checkSave(orderType);
     return orderTypeRepository.save(orderType.setAvailable(true));
   }
 
   @Override
   public Boolean delete(Long id) {
+    checkId(id);
     if(id != null && id >= 0){
       OrderType orderType = orderTypeRepository.findOne(id);
       if(orderType != null){
@@ -57,6 +62,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
 
   @Override
   public OrderType update(OrderType orderType) {
+    checkSave(orderType);
     return save(findOne(orderType.getId())
         .setAvailable(orderType.getAvailable())
         .setName(orderType.getName())

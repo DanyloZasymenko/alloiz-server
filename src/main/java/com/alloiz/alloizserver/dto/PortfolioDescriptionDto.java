@@ -7,19 +7,11 @@ import com.alloiz.alloizserver.model.enums.Language;
 @Dto
 public class PortfolioDescriptionDto {
 
-  private Portfolio portfolio;
   private Language language;
   protected Long id;
   protected Boolean available;
 
-  public Portfolio getPortfolio() {
-    return portfolio;
-  }
 
-  public PortfolioDescriptionDto setPortfolio(Portfolio portfolio) {
-    this.portfolio = portfolio;
-    return this;
-  }
 
   public Language getLanguage() {
     return language;
@@ -51,7 +43,6 @@ public class PortfolioDescriptionDto {
   @Override
   public String toString() {
     return "PortfolioDescriptionDto{" +
-        "portfolio=" + portfolio +
         ", language=" + language +
         ", id=" + id +
         ", available=" + available +

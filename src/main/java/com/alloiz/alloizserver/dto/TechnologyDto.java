@@ -1,6 +1,5 @@
 package com.alloiz.alloizserver.dto;
 
-import com.alloiz.alloizserver.model.TechnologyDescription;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class TechnologyDto {
     private String name;
     private Boolean available;
     private String image;
-    private List<TechnologyDescriptionDto> technologyDescription;
+    private List<TechnologyDescriptionDto> descriptions;
 
     public Long getId() {
         return id;
@@ -50,12 +49,12 @@ public class TechnologyDto {
         return this;
     }
 
-    public List<TechnologyDescriptionDto> getTechnologyDescription() {
-        return technologyDescription;
+    public List<TechnologyDescriptionDto> getDescriptions() {
+        return descriptions;
     }
 
-    public TechnologyDto setTechnologyDescription(List<TechnologyDescriptionDto> technologyDescription) {
-        this.technologyDescription = technologyDescription;
+    public TechnologyDto setDescriptions(List<TechnologyDescriptionDto> descriptions) {
+        this.descriptions = descriptions;
         return this;
     }
 
@@ -66,7 +65,7 @@ public class TechnologyDto {
                 ", name='" + name + '\'' +
                 ", available=" + available +
                 ", image='" + image + '\'' +
-                ", technologyDescriptionDtos=" + technologyDescription.stream().map(TechnologyDescriptionDto::getId).collect(toList()) +
+                ", technologyDescriptionDtos=" + descriptions.stream().map(TechnologyDescriptionDto::getId).collect(toList()) +
                 '}';
     }
 }
