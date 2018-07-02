@@ -61,19 +61,11 @@ public class CallbackServiceImpl implements CallbackService {
 
     @Override
     public Boolean delete(Long id) {
-        checkId(id);
-        if(id != null && id >= 0){
-            Callback callback = callbackRepository.findOne(id);
-            if(callback != null){
-                callbackRepository.delete(callback);
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        else{
-            throw new NullPointerException("Id is null or less than zero");
+        try {
+            callbackRepository.delete(checkObjectExistsById(id, callbackRepository));
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

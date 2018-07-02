@@ -56,17 +56,11 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
 
     @Override
     public Boolean delete(Long id) {
-        checkId(id);
-        if (id != null && id >= 0) {
-            CallbackTopic callbackTopic = callbackTopicRepository.findOne(id);
-            if (callbackTopic != null) {
-                callbackTopicRepository.delete(callbackTopic);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            throw new NullPointerException("Id is null or less than zero");
+        try {
+            callbackTopicRepository.delete(checkObjectExistsById(id, callbackTopicRepository));
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

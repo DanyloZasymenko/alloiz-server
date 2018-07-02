@@ -54,17 +54,11 @@ public class IncumbencyServiceImpl implements IncumbencyService {
 
   @Override
   public Boolean delete(Long id) {
-    checkId(id);
-    if (id != null && id >= 0) {
-      Incumbency incumbency = incumbencyRepository.findOne(id);
-      if (incumbency != null) {
-        incumbencyRepository.delete(incumbency);
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      throw new NullPointerException("Id is null or less than zero");
+    try {
+      incumbencyRepository.delete(checkObjectExistsById(id,incumbencyRepository));
+      return true;
+    } catch (Exception e){
+      return false;
     }
   }
 }
