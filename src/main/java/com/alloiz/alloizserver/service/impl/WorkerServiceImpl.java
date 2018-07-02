@@ -2,6 +2,7 @@ package com.alloiz.alloizserver.service.impl;
 
 import com.alloiz.alloizserver.model.Worker;
 import com.alloiz.alloizserver.repository.WorkerRepository;
+import com.alloiz.alloizserver.service.IncumbencyService;
 import com.alloiz.alloizserver.service.WorkerService;
 import com.alloiz.alloizserver.service.utils.FileBuilder;
 import org.hibernate.jdbc.Work;
@@ -22,6 +23,9 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Autowired
     private FileBuilder fileBuilder;
+
+    @Autowired
+    private IncumbencyService incumbencyService;
 
     @Override
     public Worker findOneAvailable(Long id) {
@@ -77,6 +81,7 @@ public class WorkerServiceImpl implements WorkerService {
     public Worker save(String workerJson, MultipartFile multipartFile) {
         checkJson(workerJson);
         Worker worker = json(workerJson, Worker.class);
+        worker.getIncumbencies().stream().forEach(incumbency -> incumbencyService.save(incumbency));
         if (multipartFile != null)
             worker.setImage(fileBuilder.saveFile(multipartFile));
         return save(worker);
