@@ -90,7 +90,9 @@ public class TechnologyServiceImpl implements TechnologyService {
             technology.setImage(fileBuilder.saveFile(multipartFile));
         }
         return save(technology
-                .setDescriptions(technology.getDescriptions())
+                .setDescriptions(technology.getDescriptions().stream()
+                        .map(technologyDescription -> technologyDescription
+                                .setTechnology(technology).setAvailable(true)).collect(Collectors.toList()))
                 .setName(technology.getName())
                 .setAvailable(technology.getAvailable())
         );
@@ -102,7 +104,9 @@ public class TechnologyServiceImpl implements TechnologyService {
         Technology technology = json(technologyJson, Technology.class);
         checkObjectExistsById(technology.getId(), technologyRepository);
         return save(technology
-                .setDescriptions(technology.getDescriptions())
+                .setDescriptions(technology.getDescriptions().stream()
+                        .map(technologyDescription -> technologyDescription
+                                .setTechnology(technology).setAvailable(true)).collect(Collectors.toList()))
                 .setName(technology.getName())
                 .setAvailable(technology.getAvailable())
         );
