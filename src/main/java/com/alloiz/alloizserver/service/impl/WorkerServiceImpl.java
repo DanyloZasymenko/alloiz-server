@@ -110,7 +110,7 @@ public class WorkerServiceImpl implements WorkerService {
     public Boolean delete(Long id) {
         try {
             workerRepository.delete(checkObjectExistsById(id, workerRepository));
-            return false;
+            return true;
         } catch (Exception e) {
             return false;
         }

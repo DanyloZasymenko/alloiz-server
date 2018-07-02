@@ -68,6 +68,6 @@ public class TechnologyController {
 
     @DeleteMapping("/delete/{id}")
     private ResponseEntity delete(@PathVariable Long id) {
-        return new ResponseEntity(map(technologyService.delete(id) ? HttpStatus.OK : HttpStatus.CONFLICT));
+        return ResponseEntity.ok(technologyService.delete(id));
     }
 }
