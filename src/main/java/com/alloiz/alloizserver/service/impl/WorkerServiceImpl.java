@@ -64,7 +64,7 @@ public class WorkerServiceImpl implements WorkerService {
         checkObjectExistsById(worker.getId(), workerRepository);
         return save(findOne(worker.getId())
                 .setName(worker.getName())
-                .setSurname(worker.getName())
+                .setSurname(worker.getSurname())
                 .setImage(worker.getImage())
                 .setAvailable(worker.getAvailable())
                 .setIncumbencies(worker.getIncumbencies()));
@@ -89,7 +89,7 @@ public class WorkerServiceImpl implements WorkerService {
         Worker worker = json(workerJson, Worker.class);
         checkObjectExistsById(worker.getId(), workerRepository);
         return save(worker.setName(worker.getName())
-                .setSurname(worker.getName())
+                .setSurname(worker.getSurname())
                 .setAvailable(worker.getAvailable())
                 .setIncumbencies(worker.getIncumbencies()));
     }
