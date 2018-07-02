@@ -34,7 +34,6 @@ public class OrderTypeController {
         return ResponseEntity.ok(orderTypeService.findOneAvailable(id));
     }
 
-
     @GetMapping("/find-one/{id}")
     private ResponseEntity<OrderType> findOne(@PathVariable Long id) {
         return ResponseEntity.ok(orderTypeService.findOne(id));
