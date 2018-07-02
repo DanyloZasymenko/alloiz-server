@@ -54,7 +54,7 @@ public class CallbackTopicController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity delete(@PathVariable Long id) {
-        return new ResponseEntity(map(callbackTopicService.delete(id) ? HttpStatus.OK : HttpStatus.CONFLICT));
+    private ResponseEntity<Boolean> delete(@PathVariable Long id) {
+        return ResponseEntity.ok(callbackTopicService.delete(id));
     }
 }

@@ -48,7 +48,7 @@ public class IncumbencyController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity delete(@PathVariable Long id) {
-        return ResponseEntity.status(incumbencyService.delete(id) ? HttpStatus.OK : HttpStatus.CONFLICT).build();
+    private ResponseEntity<Boolean> delete(@PathVariable Long id) {
+        return ResponseEntity.ok(incumbencyService.delete(id));
     }
 }
