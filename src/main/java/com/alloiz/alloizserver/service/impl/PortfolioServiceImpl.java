@@ -105,7 +105,7 @@ public class PortfolioServiceImpl implements PortfolioService {
     public Boolean deleteById(Long id) {
         try {
             portfolioRepository.delete(checkObjectExistsById(id, portfolioRepository));
-            return false;
+            return true;
         } catch (Exception e) {
             return false;
         }

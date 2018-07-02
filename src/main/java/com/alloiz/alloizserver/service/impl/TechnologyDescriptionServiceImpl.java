@@ -58,7 +58,7 @@ public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionSe
     public Boolean delete(Long id) {
         try {
             technologyDescriptionRepository.delete(checkObjectExistsById(id, technologyDescriptionRepository));
-            return false;
+            return true;
         } catch (Exception e) {
             return false;
         }

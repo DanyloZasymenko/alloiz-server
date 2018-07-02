@@ -100,7 +100,7 @@ public class TechnologyServiceImpl implements TechnologyService {
     public Boolean delete(Long id) {
         try {
             technologyRepository.delete(checkObjectExistsById(id,technologyRepository));
-            return false;
+            return true;
         }catch (Exception e){
             return false;
         }
