@@ -59,7 +59,7 @@ public class PortfolioController {
     }
 
     @PostMapping("/update-image/{id}")
-    private ResponseEntity<PortfolioDto> updateImage(@RequestParam MultipartFile [] multipartFile, @PathVariable Long id) {
+    private ResponseEntity<PortfolioDto> updateImage(@RequestParam MultipartFile multipartFile, @PathVariable Long id) {
         return ResponseEntity.ok(map(portfolioService.updateImage(multipartFile, id), PortfolioDto.class));
     }
 

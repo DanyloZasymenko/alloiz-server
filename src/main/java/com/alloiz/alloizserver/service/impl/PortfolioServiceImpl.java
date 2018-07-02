@@ -90,12 +90,10 @@ public class PortfolioServiceImpl implements PortfolioService {
     }
 
     @Override
-    public Portfolio updateImage(MultipartFile[] multipartFile, Long id) {
+    public Portfolio updateImage(MultipartFile multipartFile, Long id) {
         checkId(id);
         Portfolio portfolio = findOne(id);
-        for (MultipartFile file : multipartFile) {
-            imageService.save(file, portfolio.getId());
-        }
+        imageService.save(multipartFile, portfolio.getId());
         return portfolio;
     }
 

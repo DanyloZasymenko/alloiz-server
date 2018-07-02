@@ -24,6 +24,6 @@ public interface PortfolioService {
 
     Portfolio update(String portfolioJson);
 
-    Portfolio updateImage(MultipartFile [] multipartFile, Long id);
+    Portfolio updateImage(MultipartFile multipartFile, Long id);
 
 }
