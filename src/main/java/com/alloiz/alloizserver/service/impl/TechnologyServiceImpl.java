@@ -98,16 +98,11 @@ public class TechnologyServiceImpl implements TechnologyService {
 
     @Override
     public Boolean delete(Long id) {
-        if (id != null && id >= 0) {
-            Technology technologies = technologyRepository.findOne(id);
-            if (technologies != null) {
-                technologyRepository.delete(technologies);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            throw new NullPointerException("Id is null or less than zero");
+        try {
+            technologyRepository.delete(checkObjectExistsById(id,technologyRepository));
+            return false;
+        }catch (Exception e){
+            return false;
         }
     }
 }
