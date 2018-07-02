@@ -27,13 +27,13 @@ public class WorkerController {
     @GetMapping("/find-all")
     private ResponseEntity<List<WorkerShortDto>> findAll() {
         return new ResponseEntity<>(workerService.findAll().stream()
-                .map(worker -> map(worker, WorkerShortDto.class)).collect(Collectors.toList()), HttpStatus.OK);
+                .map(worker -> map(worker, WorkerFullDto.class)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("/find-all-available")
     private ResponseEntity<List<WorkerShortDto>> findAllAvailable() {
         return new ResponseEntity<>(workerService.findAllAvailable().stream()
-                .map(worker -> map(worker, WorkerShortDto.class)).collect(Collectors.toList()), HttpStatus.OK);
+                .map(worker -> map(worker, WorkerFullDto.class)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("/find-one-available/{id}")

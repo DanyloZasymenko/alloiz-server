@@ -5,6 +5,7 @@ import com.alloiz.alloizserver.repository.WorkerRepository;
 import com.alloiz.alloizserver.service.IncumbencyService;
 import com.alloiz.alloizserver.service.WorkerService;
 import com.alloiz.alloizserver.service.utils.FileBuilder;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +17,9 @@ import static com.alloiz.alloizserver.service.utils.Validation.*;
 
 @Service
 public class WorkerServiceImpl implements WorkerService {
+
+    private static final Logger LOGGER = Logger.getLogger(WorkerServiceImpl.class);
+
 
     @Autowired
     private WorkerRepository workerRepository;
@@ -51,6 +55,7 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public Worker save(Worker worker) {
         checkSave(worker);
+
         return workerRepository.save(worker.setAvailable(true));
     }
 
