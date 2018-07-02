@@ -12,6 +12,7 @@ public class CallbackShortDto<T extends CallbackShortDto> {
   protected String email;
   protected String phone;
   protected String company;
+  protected String message;
   protected Timestamp datetime;
 
   public Long getId() {
@@ -77,16 +78,26 @@ public class CallbackShortDto<T extends CallbackShortDto> {
     return (T) this;
   }
 
+  public String getMessage() {
+    return message;
+  }
+
+  public CallbackShortDto<T> setMessage(String message) {
+    this.message = message;
+    return this;
+  }
+
   @Override
   public String toString() {
     return "CallbackShortDto{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        ", available=" + available +
-        ", email='" + email + '\'' +
-        ", phone='" + phone + '\'' +
-        ", company='" + company + '\'' +
-        ", datetime=" + datetime +
-        '}';
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", available=" + available +
+            ", email='" + email + '\'' +
+            ", phone='" + phone + '\'' +
+            ", company='" + company + '\'' +
+            ", message='" + message + '\'' +
+            ", datetime=" + datetime +
+            '}';
   }
 }
