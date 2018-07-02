@@ -2,7 +2,6 @@ package com.alloiz.alloizserver.controller;
 
 import com.alloiz.alloizserver.dto.WorkerFullDto;
 import com.alloiz.alloizserver.dto.WorkerShortDto;
-import com.alloiz.alloizserver.model.Worker;
 import com.alloiz.alloizserver.service.WorkerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +50,7 @@ public class WorkerController {
 
     @PostMapping("/save")
     private ResponseEntity<WorkerFullDto> save(@RequestParam String workerJson, @RequestParam(required = false) MultipartFile multipartFile) {
-       LOGGER.info(workerJson);
+        LOGGER.info(workerJson);
         return ResponseEntity.ok(map(workerService.save(workerJson, multipartFile), WorkerFullDto.class));
     }
 
@@ -63,7 +62,10 @@ public class WorkerController {
     @PostMapping("/update")
     private ResponseEntity<WorkerFullDto> update(@RequestParam String workerJson, @RequestParam(required = false) MultipartFile multipartFile) {
         LOGGER.info(workerJson);
-        return ResponseEntity.ok(map(workerService.update(workerJson, multipartFile), WorkerFullDto.class));
+        if (multipartFile != null)
+            return ResponseEntity.ok(map(workerService.update(workerJson, multipartFile), WorkerFullDto.class));
+        else
+            return ResponseEntity.ok(map(workerService.update(workerJson), WorkerFullDto.class));
     }
 
 

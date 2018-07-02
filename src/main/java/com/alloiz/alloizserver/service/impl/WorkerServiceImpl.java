@@ -5,7 +5,6 @@ import com.alloiz.alloizserver.repository.WorkerRepository;
 import com.alloiz.alloizserver.service.IncumbencyService;
 import com.alloiz.alloizserver.service.WorkerService;
 import com.alloiz.alloizserver.service.utils.FileBuilder;
-import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,7 +56,7 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker update(Worker worker) {
-        checkObjectExistsById(worker.getId(),workerRepository);
+        checkObjectExistsById(worker.getId(), workerRepository);
         return save(findOne(worker.getId())
                 .setName(worker.getName())
                 .setSurname(worker.getName())
@@ -70,11 +69,24 @@ public class WorkerServiceImpl implements WorkerService {
     public Worker update(String workerJson, MultipartFile multipartFile) {
         checkJson(workerJson);
         Worker worker = json(workerJson, Worker.class);
-        checkObjectExistsById(worker.getId(),workerRepository);
+        checkObjectExistsById(worker.getId(), workerRepository);
         if (multipartFile != null)
             worker.setImage(fileBuilder.saveFile(multipartFile));
-        return save(worker);
+        return save(worker.setName(worker.getName())
+                .setSurname(worker.getName())
+                .setAvailable(worker.getAvailable())
+                .setIncumbencies(worker.getIncumbencies()));
+    }
 
+    @Override
+    public Worker update(String workerJson) {
+        checkJson(workerJson);
+        Worker worker = json(workerJson, Worker.class);
+        checkObjectExistsById(worker.getId(), workerRepository);
+        return save(worker.setName(worker.getName())
+                .setSurname(worker.getName())
+                .setAvailable(worker.getAvailable())
+                .setIncumbencies(worker.getIncumbencies()));
     }
 
     @Override
@@ -96,11 +108,11 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Boolean delete(Long id) {
-       try {
-           workerRepository.delete(checkObjectExistsById(id,workerRepository));
-           return false;
-       }catch (Exception e){
-           return false;
-       }
+        try {
+            workerRepository.delete(checkObjectExistsById(id, workerRepository));
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

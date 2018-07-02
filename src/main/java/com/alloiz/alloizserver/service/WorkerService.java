@@ -22,6 +22,8 @@ public interface WorkerService {
 
     Worker update(String workerJson, MultipartFile multipartFile);
 
+    Worker update(String workerJson);
+
     Worker updateImage(MultipartFile multipartFile, Long id);
 
     Boolean delete(Long id);
