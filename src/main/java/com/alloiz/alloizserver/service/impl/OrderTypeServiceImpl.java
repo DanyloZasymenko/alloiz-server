@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkObjectExistsById;
 import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
 @Service
 public class OrderTypeServiceImpl implements OrderTypeService {
@@ -62,7 +63,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
 
   @Override
   public OrderType update(OrderType orderType) {
-    checkSave(orderType);
+    checkObjectExistsById(orderType.getId(),orderTypeRepository);
     return save(findOne(orderType.getId())
         .setAvailable(orderType.getAvailable())
         .setName(orderType.getName())

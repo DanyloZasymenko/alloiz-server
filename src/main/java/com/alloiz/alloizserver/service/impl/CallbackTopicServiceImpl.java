@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkObjectExistsById;
 import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
 
 @Service
@@ -47,7 +48,7 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
 
     @Override
     public CallbackTopic update(CallbackTopic callbackTopic) {
-        checkSave(callbackTopic);
+        checkObjectExistsById(callbackTopic.getId(),callbackTopicRepository);
         return save(findOne(callbackTopic.getId())
                     .setName(callbackTopic.getName())
                     .setAvailable(callbackTopic.getAvailable()));

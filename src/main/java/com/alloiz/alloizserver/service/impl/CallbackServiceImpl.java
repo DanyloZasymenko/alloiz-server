@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkObjectExistsById;
 import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
 
 @Service
@@ -52,7 +53,7 @@ public class CallbackServiceImpl implements CallbackService {
 
     @Override
     public Callback update(Callback callback) {
-        checkSave(callback);
+        checkObjectExistsById(callback.getId(),callbackRepository);
         return save(findOne(callback.getId())
                     .setPhone(callback.getPhone())
                     .setAvailable(callback.getAvailable()));

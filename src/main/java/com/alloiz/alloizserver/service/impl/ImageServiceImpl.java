@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkObjectExistsById;
 import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
 
 @Service
@@ -77,7 +78,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image update(Image image) {
-        checkSave(image);
+        checkObjectExistsById(image.getId(),imageRepository);
         return save(findOne(image.getId())
                 .setPath(image.getPath())
                 .setAvailable(image.getAvailable())

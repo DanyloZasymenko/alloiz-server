@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static com.alloiz.alloizserver.service.utils.Validation.checkId;
+import static com.alloiz.alloizserver.service.utils.Validation.checkObjectExistsById;
 import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
 @Service
 public class IncumbencyServiceImpl implements IncumbencyService {
@@ -44,7 +45,7 @@ public class IncumbencyServiceImpl implements IncumbencyService {
 
   @Override
   public Incumbency update(Incumbency incumbency) {
-    checkSave(incumbency);
+    checkObjectExistsById(incumbency.getId(),incumbencyRepository);
     return save(findOne(incumbency.getId())
         .setAvailable(incumbency.getAvailable())
         .setName(incumbency.getName())
