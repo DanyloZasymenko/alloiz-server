@@ -47,7 +47,7 @@ public class PortfolioDescriptionServiceImpl implements PortfolioDescriptionServ
     @Override
     public PortfolioDescription update(PortfolioDescription portfolioDescription) {
         checkObjectExistsById(portfolioDescription.getId(), portfolioDescriptionRepository);
-        return save(findOne(portfolioDescription.getId())
+        return portfolioDescriptionRepository.save(findOne(portfolioDescription.getId())
                 .setDescription(portfolioDescription.getDescription())
                 .setLanguage(portfolioDescription.getLanguage())
                 .setAvailable(portfolioDescription.getAvailable())

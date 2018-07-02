@@ -84,7 +84,7 @@ public class PortfolioServiceImpl implements PortfolioService {
         try {
             LOGGER.info(portfolio);
             checkObjectExistsById(portfolio.getId(), portfolioRepository);
-            return save(findOne(portfolio.getId())
+            return portfolioRepository.save(findOne(portfolio.getId())
                     .setName(portfolio.getName())
                     .setAvailable(portfolio.getAvailable())
                     .setDescriptions(portfolio.getDescriptions().stream()

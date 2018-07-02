@@ -47,7 +47,7 @@ public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionSe
     @Override
     public TechnologyDescription update(TechnologyDescription technologyDescription) {
         checkObjectExistsById(technologyDescription.getId(), technologyDescriptionRepository);
-        return save(findOne(technologyDescription.getId())
+        return technologyDescriptionRepository.save(findOne(technologyDescription.getId())
                 .setDescription(technologyDescription.getDescription())
                 .setTechnology(technologyDescription.getTechnology())
                 .setLanguage(technologyDescription.getLanguage())

@@ -80,7 +80,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Image update(Image image) {
         checkObjectExistsById(image.getId(), imageRepository);
-        return save(findOne(image.getId())
+        return imageRepository.save(findOne(image.getId())
                 .setPath(image.getPath())
                 .setAvailable(image.getAvailable())
                 .setName(image.getName()));

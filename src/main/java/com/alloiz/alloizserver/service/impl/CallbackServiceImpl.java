@@ -54,7 +54,7 @@ public class CallbackServiceImpl implements CallbackService {
     @Override
     public Callback update(Callback callback) {
         checkObjectExistsById(callback.getId(),callbackRepository);
-        return save(findOne(callback.getId())
+        return callbackRepository.save(findOne(callback.getId())
                     .setPhone(callback.getPhone())
                     .setAvailable(callback.getAvailable()));
     }

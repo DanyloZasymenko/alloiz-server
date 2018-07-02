@@ -74,7 +74,7 @@ public class TechnologyServiceImpl implements TechnologyService {
     @Override
     public Technology update(Technology technologies) {
         checkObjectExistsById(technologies.getId(), technologyRepository);
-        return save(findOne(technologies.getId())
+        return technologyRepository.save(findOne(technologies.getId())
                 .setName(technologies.getName())
                 .setImage(technologies.getImage())
                 .setDescriptions(technologies.getDescriptions())

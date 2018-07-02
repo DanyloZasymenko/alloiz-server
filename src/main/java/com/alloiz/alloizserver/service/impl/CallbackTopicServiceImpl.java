@@ -49,9 +49,9 @@ public class CallbackTopicServiceImpl implements CallbackTopicService {
     @Override
     public CallbackTopic update(CallbackTopic callbackTopic) {
         checkObjectExistsById(callbackTopic.getId(),callbackTopicRepository);
-        return save(findOne(callbackTopic.getId())
-                    .setName(callbackTopic.getName())
-                    .setAvailable(callbackTopic.getAvailable()));
+        return callbackTopicRepository.save(findOne(callbackTopic.getId())
+                    .setAvailable(callbackTopic.getAvailable())
+                    .setName(callbackTopic.getName()));
     }
 
     @Override
