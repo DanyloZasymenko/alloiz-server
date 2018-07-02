@@ -51,6 +51,6 @@ public class OrderTypeController {
 
     @DeleteMapping("/delete/{id}")
     private ResponseEntity delete(@PathVariable Long id) {
-        return ResponseEntity.status(orderTypeService.delete(id) ? HttpStatus.OK : HttpStatus.CONFLICT).build();
+        return ResponseEntity.ok(orderTypeService.delete(id));
     }
 }

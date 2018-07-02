@@ -49,12 +49,6 @@ public class PortfolioController {
 
     @PostMapping("/save")
     private ResponseEntity<PortfolioDto> save(@RequestParam String portfolioJson, @RequestParam(required = false) MultipartFile [] multipartFiles) {
-       LOGGER.info(portfolioJson);
-       LOGGER.info(portfolioJson);
-       LOGGER.info(portfolioJson);
-       LOGGER.info(portfolioJson);
-       LOGGER.info(portfolioJson);
-       LOGGER.info(portfolioJson);
         return ResponseEntity.ok(map(portfolioService.save(portfolioJson, multipartFiles), PortfolioDto.class));
     }
 
@@ -70,7 +64,7 @@ public class PortfolioController {
 
     @DeleteMapping("/delete/{id}")
     private ResponseEntity delete(@PathVariable Long id) {
-        return new ResponseEntity(map(portfolioService.deleteById(id) ? HttpStatus.OK : HttpStatus.CONFLICT));
+        return ResponseEntity.ok(portfolioService.deleteById(id));
     }
 
 }

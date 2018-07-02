@@ -50,8 +50,8 @@ public class TechnologyDescriptionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity delete(@PathVariable Long id) {
-        return new ResponseEntity(map(technologyDescriptionService.delete(id) ? HttpStatus.OK : HttpStatus.CONFLICT));
+    private ResponseEntity<Boolean> delete(@PathVariable Long id) {
+        return ResponseEntity.ok(technologyDescriptionService.delete(id));
     }
 
     @PostMapping("/update")

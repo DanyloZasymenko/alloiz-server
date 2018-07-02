@@ -73,8 +73,8 @@ public class WorkerController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity delete(@PathVariable Long id) {
-        return new ResponseEntity(map(workerService.delete(id) ? HttpStatus.OK : HttpStatus.CONFLICT));
+    private ResponseEntity<Boolean> delete(@PathVariable Long id) {
+        return ResponseEntity.ok(workerService.delete(id));
     }
 
 
