@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.alloiz.alloizserver.service.utils.Validation.checkId;
-import static com.alloiz.alloizserver.service.utils.Validation.checkSave;
-import static com.alloiz.alloizserver.service.utils.Validation.checkObjectExistsById;
+import static com.alloiz.alloizserver.service.utils.Validation.*;
 
 @Service
 public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionService {
@@ -48,7 +46,7 @@ public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionSe
 
     @Override
     public TechnologyDescription update(TechnologyDescription technologyDescription) {
-        checkObjectExistsById(technologyDescription.getId(),technologyDescriptionRepository);
+        checkObjectExistsById(technologyDescription.getId(), technologyDescriptionRepository);
         return save(findOne(technologyDescription.getId())
                 .setDescription(technologyDescription.getDescription())
                 .setTechnology(technologyDescription.getTechnology())
@@ -58,16 +56,11 @@ public class TechnologyDescriptionServiceImpl implements TechnologyDescriptionSe
 
     @Override
     public Boolean delete(Long id) {
-        if (id != null && id >= 0) {
-            TechnologyDescription technologyDescription = findOne(id);
-            if (technologyDescription != null) {
-                technologyDescriptionRepository.delete(technologyDescription);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            throw new NullPointerException("Id is null or less than zero");
+        try {
+            technologyDescriptionRepository.delete(checkObjectExistsById(id, technologyDescriptionRepository));
+            return false;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

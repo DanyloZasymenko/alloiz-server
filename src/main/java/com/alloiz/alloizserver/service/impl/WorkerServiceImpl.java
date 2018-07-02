@@ -96,16 +96,11 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Boolean delete(Long id) {
-        if (id != null && id >= 0) {
-            Worker worker = workerRepository.findOne(id);
-            if (worker != null) {
-                workerRepository.delete(worker);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            throw new NullPointerException("Id is null or less than zero");
-        }
+       try {
+           workerRepository.delete(checkObjectExistsById(id,workerRepository));
+           return false;
+       }catch (Exception e){
+           return false;
+       }
     }
 }

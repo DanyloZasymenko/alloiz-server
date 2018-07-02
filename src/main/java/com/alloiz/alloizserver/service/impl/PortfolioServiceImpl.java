@@ -81,7 +81,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public Portfolio update(Portfolio portfolio) {
-        checkObjectExistsById(portfolio.getId(),portfolioRepository);
+        checkObjectExistsById(portfolio.getId(), portfolioRepository);
         return save(findOne(portfolio.getId())
                 .setName(portfolio.getName())
                 .setAvailable(portfolio.getAvailable())
@@ -103,16 +103,11 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public Boolean deleteById(Long id) {
-        if (id != null && id >= 0) {
-            Portfolio portfolio = portfolioRepository.findOne(id);
-            if (portfolio != null) {
-                portfolioRepository.delete(portfolio);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            throw new NullPointerException("Id is null or less than zero");
+        try {
+            portfolioRepository.delete(checkObjectExistsById(id, portfolioRepository));
+            return false;
+        } catch (Exception e) {
+            return false;
         }
     }
 
