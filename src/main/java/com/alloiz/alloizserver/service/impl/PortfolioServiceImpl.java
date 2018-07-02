@@ -79,7 +79,7 @@ public class PortfolioServiceImpl implements PortfolioService {
         checkJson(portfolioJson);
         Portfolio portfolio = json(portfolioJson, Portfolio.class);
         checkObjectExistsById(portfolio.getId(), portfolioRepository);
-        portfolio = save(findOne(portfolio.getId())
+        portfolio = portfolioRepository.save(findOne(portfolio.getId())
                 .setName(portfolio.getName())
                 .setAvailable(portfolio.getAvailable())
                 .setDescriptions(portfolio.getDescriptions())

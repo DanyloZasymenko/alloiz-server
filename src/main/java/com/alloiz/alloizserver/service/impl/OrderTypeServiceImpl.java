@@ -57,7 +57,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
     @Override
     public OrderType update(OrderType orderType) {
         checkObjectExistsById(orderType.getId(), orderTypeRepository);
-        return save(findOne(orderType.getId())
+        return orderTypeRepository.save(findOne(orderType.getId())
                 .setAvailable(orderType.getAvailable())
                 .setName(orderType.getName())
         );

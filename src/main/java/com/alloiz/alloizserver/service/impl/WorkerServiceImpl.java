@@ -62,7 +62,7 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public Worker update(Worker worker) {
         checkObjectExistsById(worker.getId(), workerRepository);
-        return save(findOne(worker.getId())
+        return workerRepository.save(findOne(worker.getId())
                 .setName(worker.getName())
                 .setSurname(worker.getSurname())
                 .setImage(worker.getImage())

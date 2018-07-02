@@ -46,7 +46,7 @@ public class IncumbencyServiceImpl implements IncumbencyService {
   @Override
   public Incumbency update(Incumbency incumbency) {
     checkObjectExistsById(incumbency.getId(),incumbencyRepository);
-    return save(findOne(incumbency.getId())
+    return incumbencyRepository.save(findOne(incumbency.getId())
         .setAvailable(incumbency.getAvailable())
         .setName(incumbency.getName())
         .setOpen(incumbency.getOpen()));
