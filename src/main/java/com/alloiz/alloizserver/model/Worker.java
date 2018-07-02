@@ -1,7 +1,6 @@
 package com.alloiz.alloizserver.model;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.util.List;
@@ -11,10 +10,8 @@ import static java.util.stream.Collectors.toList;
 @Entity
 public class Worker extends GeneralName<Worker> {
 
-    @Column(unique = true)
     private String surname;
     private String image;
-
 
     @ManyToMany(cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,

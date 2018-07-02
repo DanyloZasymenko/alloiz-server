@@ -37,19 +37,20 @@ public class WorkerController {
     }
 
     @GetMapping("/find-one-available/{id}")
-    private ResponseEntity<WorkerShortDto> findOneAvailale(@PathVariable Long id) {
-        return new ResponseEntity<>(map(workerService.findOneAvailable(id), WorkerShortDto.class), HttpStatus.OK);
+    private ResponseEntity<WorkerFullDto> findOneAvailale(@PathVariable Long id) {
+        return new ResponseEntity<>(map(workerService.findOneAvailable(id), WorkerFullDto.class), HttpStatus.OK);
     }
 
 
     @GetMapping("/find-one/{id}")
-    private ResponseEntity<WorkerShortDto> findOne(@PathVariable Long id) {
-        return new ResponseEntity<>(map(workerService.findOne(id), WorkerShortDto.class), HttpStatus.OK);
+    private ResponseEntity<WorkerFullDto> findOne(@PathVariable Long id) {
+        return new ResponseEntity<>(map(workerService.findOne(id), WorkerFullDto.class), HttpStatus.OK);
     }
 
 
     @PostMapping("/save")
-    private ResponseEntity<WorkerFullDto> save(@RequestParam String workerJson, @RequestParam(required = false) MultipartFile multipartFile) {
+    private ResponseEntity<WorkerFullDto> save(@RequestParam String workerJson,
+                                               @RequestParam(required = false) MultipartFile multipartFile) {
         LOGGER.info(workerJson);
         return ResponseEntity.ok(map(workerService.save(workerJson, multipartFile), WorkerFullDto.class));
     }
