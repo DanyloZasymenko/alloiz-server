@@ -75,13 +75,12 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public Portfolio save(Portfolio portfolio) {
-        checkObjectExistsById(portfolio.getId(),portfolioRepository);
         return portfolioRepository.save(portfolio.setAvailable(true));
     }
 
     @Override
     public Portfolio update(Portfolio portfolio) {
-
+        checkObjectExistsById(portfolio.getId(),portfolioRepository);
         return save(findOne(portfolio.getId())
                 .setName(portfolio.getName())
                 .setAvailable(portfolio.getAvailable())
