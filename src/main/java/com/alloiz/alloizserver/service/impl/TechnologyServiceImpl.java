@@ -65,7 +65,7 @@ public class TechnologyServiceImpl implements TechnologyService {
                 .map(technologyDescription -> technologyDescription
                         .setTechnology(technology).setAvailable(true)).collect(Collectors.toList()));
 
-        if (multipartFile != null) {
+        if (multipartFile != null && !multipartFile.isEmpty()) {
             technology.setImage(fileBuilder.saveFile(multipartFile));
         }
         return save(technology);
@@ -86,6 +86,7 @@ public class TechnologyServiceImpl implements TechnologyService {
         checkJson(technologyJson);
         Technology technology = json(technologyJson, Technology.class);
         checkObjectExistsById(technology.getId(), technologyRepository);
+        System.out.println(multipartFile.getOriginalFilename());
         if (multipartFile != null) {
             technology.setImage(fileBuilder.saveFile(multipartFile));
         }

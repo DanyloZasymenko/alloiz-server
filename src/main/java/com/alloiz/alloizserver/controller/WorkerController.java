@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.alloiz.alloizserver.dto.utils.builder.Builder.map;
@@ -62,11 +63,19 @@ public class WorkerController {
 
     @PostMapping("/update")
     private ResponseEntity<WorkerFullDto> update(@RequestParam String workerJson, @RequestParam(required = false) MultipartFile multipartFile) {
+        LOGGER.info("---------------------------Worker---------------------");
         LOGGER.info(workerJson);
-        if (multipartFile != null)
+        LOGGER.info("-----------END----------------Worker------------END---------");
+        LOGGER.info("-----------------------------FILE-----------------------------");
+        LOGGER.info(multipartFile==null?"null":multipartFile.getName());
+        LOGGER.info("-------------END----------------FILE-----------------END------------");
+        if (multipartFile != null && !multipartFile.isEmpty()) {
+            LOGGER.info("file not null");
             return ResponseEntity.ok(map(workerService.update(workerJson, multipartFile), WorkerFullDto.class));
-        else
+        } else {
+            LOGGER.info("file is null (in else clause)");
             return ResponseEntity.ok(map(workerService.update(workerJson), WorkerFullDto.class));
+        }
     }
 
 

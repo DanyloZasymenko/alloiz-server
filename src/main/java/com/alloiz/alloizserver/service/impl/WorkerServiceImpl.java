@@ -75,7 +75,7 @@ public class WorkerServiceImpl implements WorkerService {
         checkJson(workerJson);
         Worker worker = json(workerJson, Worker.class);
         checkObjectExistsById(worker.getId(), workerRepository);
-        if (multipartFile != null)
+        if (multipartFile != null && !multipartFile.isEmpty())
             worker.setImage(fileBuilder.saveFile(multipartFile));
         return save(worker.setName(worker.getName())
                 .setSurname(worker.getSurname())

@@ -63,11 +63,20 @@ public class TechnologyController {
 
     @PostMapping("/update")
     private ResponseEntity<TechnologyDto> update(@RequestParam String technologyJson, @RequestParam(required = false) MultipartFile multipartFile) {
+        LOGGER.info("---------------------------Worker---------------------");
         LOGGER.info(technologyJson);
-        if (multipartFile != null)
+        LOGGER.info("-----------END----------------Worker------------END---------");
+        LOGGER.info("-----------------------------FILE-----------------------------");
+        LOGGER.info(multipartFile==null?"null":multipartFile.getName());
+        LOGGER.info("-------------END----------------FILE-----------------END------------");
+        if (multipartFile != null && !multipartFile.isEmpty()){
+            LOGGER.info("file not null");
             return ResponseEntity.ok(map(technologyService.update(technologyJson, multipartFile), TechnologyDto.class));
-        else
+        }
+        else {
+            LOGGER.info("file is null (in else clause)");
             return ResponseEntity.ok(map(technologyService.update(technologyJson), TechnologyDto.class));
+        }
     }
 
     @PostMapping("/update-image/{id}")
