@@ -3,6 +3,7 @@ package com.alloiz.alloizserver.service.impl;
 import com.alloiz.alloizserver.model.Callback;
 import com.alloiz.alloizserver.repository.CallbackRepository;
 import com.alloiz.alloizserver.service.CallbackService;
+import com.alloiz.alloizserver.service.MailService;
 import com.alloiz.alloizserver.service.utils.Validation;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -20,6 +21,9 @@ public class CallbackServiceImpl implements CallbackService {
 
     @Autowired
     private CallbackRepository callbackRepository;
+
+    @Autowired
+    private MailService mailService;
 
     @Override
     public Callback findOneAvailable(Long id) {
@@ -46,6 +50,7 @@ public class CallbackServiceImpl implements CallbackService {
     @Override
     public Callback save(Callback callback) {
         checkSave(callback);
+        mailService.sendCallback(callback);
        return callbackRepository.save(callback
                .setDatetime(Timestamp.valueOf(LocalDateTime.now()))
                .setAvailable(true));
