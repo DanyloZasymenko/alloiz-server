@@ -22,7 +22,6 @@ public class TechnologyController {
 
     private static final Logger LOGGER = Logger.getLogger(TechnologyController.class);
 
-
     @Autowired
     private TechnologyService technologyService;
 
