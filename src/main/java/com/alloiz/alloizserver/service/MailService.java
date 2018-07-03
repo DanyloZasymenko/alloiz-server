@@ -1,6 +1,8 @@
 package com.alloiz.alloizserver.service;
 
+import com.alloiz.alloizserver.model.Callback;
+
 public interface MailService {
 
-    void support(String supportText,String from);
+    Callback sendCallback(Callback callback);
 }
