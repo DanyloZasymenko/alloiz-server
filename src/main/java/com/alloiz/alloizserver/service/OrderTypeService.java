@@ -1,6 +1,5 @@
 package com.alloiz.alloizserver.service;
 
-import com.alloiz.alloizserver.model.OrderType;
 import java.util.List;
 
 public interface OrderTypeService {

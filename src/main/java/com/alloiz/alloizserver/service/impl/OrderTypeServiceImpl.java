@@ -1,6 +1,5 @@
 package com.alloiz.alloizserver.service.impl;
 
-import com.alloiz.alloizserver.model.OrderType;
 import com.alloiz.alloizserver.repository.OrderTypeRepository;
 import com.alloiz.alloizserver.service.OrderTypeService;
 import org.springframework.beans.factory.annotation.Autowired;

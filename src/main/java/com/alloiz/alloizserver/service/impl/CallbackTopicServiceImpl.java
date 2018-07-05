@@ -1,6 +1,5 @@
 package com.alloiz.alloizserver.service.impl;
 
-import com.alloiz.alloizserver.model.CallbackTopic;
 import com.alloiz.alloizserver.repository.CallbackTopicRepository;
 import com.alloiz.alloizserver.service.CallbackTopicService;
 import org.springframework.beans.factory.annotation.Autowired;

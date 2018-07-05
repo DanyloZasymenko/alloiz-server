@@ -1,6 +1,5 @@
 package com.alloiz.alloizserver.service;
 
-import com.alloiz.alloizserver.model.CallbackTopic;
 import java.util.List;
 
 public interface CallbackTopicService {

@@ -1,5 +1,7 @@
 package com.alloiz.alloizserver.model;
 
+import com.alloiz.alloizserver.model.enums.CallbackTopic;
+import com.alloiz.alloizserver.model.enums.OrderType;
 import com.alloiz.alloizserver.model.utils.DateDeserializer;
 import com.alloiz.alloizserver.model.utils.DateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -19,8 +21,9 @@ public class Callback extends GeneralName<Callback> {
     @Column(columnDefinition = "LONGTEXT")
     private String message;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
     private CallbackTopic callbackTopic;
+
+    private OrderType orderType;
 
     public String getEmail() {
         return email;
@@ -78,6 +81,15 @@ public class Callback extends GeneralName<Callback> {
         return this;
     }
 
+    public OrderType getOrderType() {
+        return orderType;
+    }
+
+    public Callback setOrderType(OrderType orderType) {
+        this.orderType = orderType;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Callback{" +
@@ -86,7 +98,8 @@ public class Callback extends GeneralName<Callback> {
                 ", company='" + company + '\'' +
                 ", datetime=" + datetime +
                 ", message='" + message + '\'' +
-                ", callbackTopic=" + (callbackTopic == null ? "null" : callbackTopic) +
+                ", callbackTopic=" + callbackTopic +
+                ", orderType=" + orderType +
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", available=" + available +
