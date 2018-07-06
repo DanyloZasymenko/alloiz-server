@@ -14,6 +14,9 @@ public class GeneralName<T extends GeneralName> {
   protected String name;
   protected Boolean available;
 
+  public GeneralName() {
+  }
+
   public Long getId() {
     return id;
   }

@@ -1,13 +1,9 @@
 package com.alloiz.alloizserver.model.enums;
 
 public enum OrderType {
-    WEBSITE("Web-site"),
-    DESIGN("Design"),
-    OTHER("Other");
+    NONE,
+    WEBSITE,
+    DESIGN,
+    OTHER
 
-    private final String name;
-
-    OrderType(String name) {
-        this.name = name;
-    }
 }

@@ -2,6 +2,10 @@ package com.alloiz.alloizserver.dto;
 
 import com.alloiz.alloizserver.model.enums.CallbackTopic;
 import com.alloiz.alloizserver.model.enums.OrderType;
+import com.alloiz.alloizserver.model.utils.DateDeserializer;
+import com.alloiz.alloizserver.model.utils.DateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.sql.Timestamp;
 
@@ -16,7 +20,7 @@ public class CallbackDto {
     protected String message;
     protected Timestamp datetime;
     private CallbackTopic callbackTopic;
-    private OrderType orderTypel;
+    private OrderType orderType;
 
     public CallbackDto() {
     }
@@ -84,10 +88,12 @@ public class CallbackDto {
         return this;
     }
 
+    @JsonSerialize(using = DateSerializer.class)
     public Timestamp getDatetime() {
         return datetime;
     }
 
+    @JsonDeserialize(using = DateDeserializer.class)
     public CallbackDto setDatetime(Timestamp datetime) {
         this.datetime = datetime;
         return this;
@@ -102,12 +108,12 @@ public class CallbackDto {
         return this;
     }
 
-    public OrderType getOrderTypel() {
-        return orderTypel;
+    public OrderType getOrderType() {
+        return orderType;
     }
 
-    public CallbackDto setOrderTypel(OrderType orderTypel) {
-        this.orderTypel = orderTypel;
+    public CallbackDto setOrderType(OrderType orderType) {
+        this.orderType = orderType;
         return this;
     }
 
@@ -123,7 +129,7 @@ public class CallbackDto {
                 ", message='" + message + '\'' +
                 ", datetime=" + datetime +
                 ", callbackTopic=" + callbackTopic +
-                ", orderTypel=" + orderTypel +
+                ", orderType=" + orderType +
                 '}';
     }
 }

@@ -18,6 +18,9 @@ public class Callback extends GeneralName<Callback> {
     private String company;
     private Timestamp datetime;
 
+    public Callback() {
+    }
+
     @Column(columnDefinition = "LONGTEXT")
     private String message;
 

@@ -4,12 +4,14 @@ package com.alloiz.alloizserver.dto.utils.impl;
 import com.alloiz.alloizserver.dto.utils.DtoMapper;
 import com.alloiz.alloizserver.dto.utils.annotations.Dto;
 import com.alloiz.alloizserver.dto.utils.annotations.EnableMapper;
+import org.apache.log4j.Logger;
 import org.reflections.Reflections;
 
 import javax.persistence.Entity;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,6 +23,8 @@ import static java.util.stream.Collectors.toList;
 
 @EnableMapper(dto = "com.alloiz.alloiz.dto", model = "com.alloiz.alloiz.model")
 public class DtoMapperImpl implements DtoMapper {
+
+    private static final Logger logger = Logger.getLogger(DtoMapperImpl.class);
 
     private Class classFromReflection;
     private EnableMapper enableMapper;
@@ -38,6 +42,8 @@ public class DtoMapperImpl implements DtoMapper {
     }
 
     public Object parseFromDTOtoObject(Object dtoObject, Class... parsingClasses) {
+        if (dtoObject == null)
+            return null;
         try {
             final Object object = parsingClasses[0].newInstance();
             Arrays.stream(parsingClasses[0].getMethods())
@@ -50,6 +56,7 @@ public class DtoMapperImpl implements DtoMapper {
                                     || method1.getParameterTypes()[0].equals(Character.class)
                                     || method1.getParameterTypes()[0].getSuperclass().equals(Number.class)
                                     || method1.getParameterTypes()[0].equals(LocalDate.class)
+                                    || method1.getParameterTypes()[0].equals(Timestamp.class)
                                     || method1.getParameterTypes()[0].equals(LocalDateTime.class)
                                     || method1.getParameterTypes()[0].equals(Boolean.class))) {
 
@@ -86,10 +93,21 @@ public class DtoMapperImpl implements DtoMapper {
                                                 }
                                             } catch (IllegalAccessException | InvocationTargetException e) {
                                                 e.printStackTrace();
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                                try {
+                                                    logger.info("found an exception");
+                                                    logger.info(method1.getName());
+                                                } catch (Exception ee) {
+                                                    logger.info("sukabliadskepizdoujobishche");
+                                                }
                                             }
                                         });
                             }
                         } catch (NullPointerException e) {
+                            logger.info(method1.getParameterTypes()[0].getName());
+                            logger.info(method1.getName());
+                            logger.info(parsingClasses[0].getName());
                             e.printStackTrace();
 //                            try {
 //                                method1.invoke(object, new ArrayList());
@@ -108,7 +126,8 @@ public class DtoMapperImpl implements DtoMapper {
     }
 
     private Object tempParse(Object dtoObject, Class... parsingClasses) {
-
+        if (dtoObject == null)
+            return null;
         try {
 //            classFromReflection = (Class) new Reflections("com.mplus.web1.dto.utils").getTypesAnnotatedWith(EnableMapper.class).toArray()[0];
 //            enableMapper = (EnableMapper) classFromReflection.getAnnotations()[0];
@@ -157,6 +176,8 @@ public class DtoMapperImpl implements DtoMapper {
 
 
     private void parser(Object dtoObject, Object parsedObject, Method[] methods) {
+        if (dtoObject == null)
+            return;
         Arrays.stream(parsedObject.getClass().getMethods()).filter(method -> method.getName().contains("set")).forEach(
                 method -> {
                     if ((method.getParameterTypes()[0].getSuperclass().equals(Enum.class)
@@ -165,6 +186,7 @@ public class DtoMapperImpl implements DtoMapper {
                             || method.getParameterTypes()[0].equals(Character.class)
                             || method.getParameterTypes()[0].getSuperclass().equals(Number.class)
                             || method.getParameterTypes()[0].equals(LocalDate.class)
+                            || method.getParameterTypes()[0].equals(Timestamp.class)
                             || method.getParameterTypes()[0].equals(LocalDateTime.class))) {
 
 

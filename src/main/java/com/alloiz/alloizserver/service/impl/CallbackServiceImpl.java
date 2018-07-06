@@ -50,7 +50,7 @@ public class CallbackServiceImpl implements CallbackService {
     @Override
     public Callback save(Callback callback) {
         checkSave(callback);
-        mailService.sendCallback(callback);
+        //mailService.sendCallback(callback);
        return callbackRepository.save(callback
                .setDatetime(Timestamp.valueOf(LocalDateTime.now()))
                .setAvailable(true));
