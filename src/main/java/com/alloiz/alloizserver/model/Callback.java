@@ -7,7 +7,10 @@ import com.alloiz.alloizserver.model.utils.DateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.sql.Timestamp;
 
 @Entity
@@ -17,16 +20,17 @@ public class Callback extends GeneralName<Callback> {
     private String phone;
     private String company;
     private Timestamp datetime;
-
-    public Callback() {
-    }
-
     @Column(columnDefinition = "LONGTEXT")
     private String message;
 
+    @Enumerated(EnumType.STRING)
     private CallbackTopic callbackTopic;
 
+    @Enumerated(EnumType.STRING)
     private OrderType orderType;
+
+    public Callback() {
+    }
 
     public String getEmail() {
         return email;
