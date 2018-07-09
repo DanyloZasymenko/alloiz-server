@@ -35,13 +35,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/img/**").permitAll()
                 .antMatchers("/oauth/token").permitAll()
                 //ПРИКЛАД
-                .antMatchers(HttpMethod.POST, "/article/**").access("hasAuthority('MODERATOR')")
-                .antMatchers(HttpMethod.DELETE, "/article/**").access("hasAuthority('MODERATOR')")
+                .antMatchers(HttpMethod.POST, "/image/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/image/**").authenticated()
                 .antMatchers(HttpMethod.GET, "/article/**").permitAll()
-                .antMatchers("/article/find-one-available/**").permitAll()
-                .antMatchers("/add").permitAll()
                 .anyRequest().permitAll();
     }
-
 
 }
