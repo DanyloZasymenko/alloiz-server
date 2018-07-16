@@ -68,7 +68,7 @@ public class TechnologyServiceImpl implements TechnologyService {
         if (multipartFile != null && !multipartFile.isEmpty()) {
             technology.setImage(fileBuilder.saveFile(multipartFile));
         }
-        return save(technology);
+        return technologyRepository.save(technology);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class TechnologyServiceImpl implements TechnologyService {
         if (multipartFile != null) {
             technology.setImage(fileBuilder.saveFile(multipartFile));
         }
-        return save(technology
+        return technologyRepository.save(technology
                 .setDescriptions(technology.getDescriptions().stream()
                         .map(technologyDescription -> technologyDescription
                                 .setTechnology(technology).setAvailable(true)).collect(Collectors.toList()))
@@ -104,7 +104,7 @@ public class TechnologyServiceImpl implements TechnologyService {
         checkJson(technologyJson);
         Technology technology = json(technologyJson, Technology.class);
         checkObjectExistsById(technology.getId(), technologyRepository);
-        return save(technology
+        return technologyRepository.save(technology
                 .setDescriptions(technology.getDescriptions().stream()
                         .map(technologyDescription -> technologyDescription
                                 .setTechnology(technology).setAvailable(true)).collect(Collectors.toList()))

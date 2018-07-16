@@ -77,7 +77,7 @@ public class WorkerServiceImpl implements WorkerService {
         checkObjectExistsById(worker.getId(), workerRepository);
         if (multipartFile != null && !multipartFile.isEmpty())
             worker.setImage(fileBuilder.saveFile(multipartFile));
-        return save(worker.setName(worker.getName())
+        return workerRepository.save(worker.setName(worker.getName())
                 .setSurname(worker.getSurname())
                 .setAvailable(worker.getAvailable())
                 .setIncumbencies(worker.getIncumbencies()));
@@ -88,7 +88,7 @@ public class WorkerServiceImpl implements WorkerService {
         checkJson(workerJson);
         Worker worker = json(workerJson, Worker.class);
         checkObjectExistsById(worker.getId(), workerRepository);
-        return save(worker.setName(worker.getName())
+        return workerRepository.save(worker.setName(worker.getName())
                 .setSurname(worker.getSurname())
                 .setAvailable(worker.getAvailable())
                 .setIncumbencies(worker.getIncumbencies()));
@@ -101,7 +101,7 @@ public class WorkerServiceImpl implements WorkerService {
         worker.getIncumbencies().stream().forEach(incumbency -> incumbencyService.save(incumbency));
         if (multipartFile != null)
             worker.setImage(fileBuilder.saveFile(multipartFile));
-        return save(worker);
+        return workerRepository.save(worker);
     }
 
     @Override
